@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    //TODO
+    //TODO:
 }
 
 export const menuSlice = createSlice({
