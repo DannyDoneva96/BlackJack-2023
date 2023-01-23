@@ -14,5 +14,5 @@ export const menuSlice = createSlice({
     }
 });
 
-// export const {/*PUT THE NAMES OF THE REDUCERS*/} = menuSlice.actions/....
+// export const {/*PUT THE NAMES OF THE REDUCERS*/} = menuSlice.actions
 export default menuSlice.reducer;
