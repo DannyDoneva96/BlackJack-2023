@@ -78,3 +78,26 @@ html{
 
 }
 a{    text-decoration: none;}
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(223, 190, 106, 0.7) #4d4d4d;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #4d4d4d;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color:rgba(223, 190, 106, 0.7);
+    border-radius: 6px;
+    border: 0px none #ffffff;
+  }
