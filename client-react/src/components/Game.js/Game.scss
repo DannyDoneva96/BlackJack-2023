@@ -50,3 +50,28 @@
   .chips-bottom{
     width: 100px
   }
+  .btn-main-menu{
+    margin: 0 auto;
+    display: block;
+    margin-top: 1rem;
+    width: 15rem;
+    background-color: #262626;
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    color: rgba(223, 190, 106, 0.7);
+    padding: 0.5rem 1rem;
+    background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8), rgba(34, 34, 34, 0), rgba(34, 34, 34, 0));
+    background-position: 1% 50%;
+    background-size: 300% 300%;
+    border: 1px solid rgba(223, 190, 106, 0.7);
+    transition: all 0.7s ease-in-out;
+}
+
+.btn-main-menu:hover{
+    color: black;
+    border: 1px solid rgba(223, 190, 106, 0);
+    background-position: 99% 50%;
+
+}
+  
