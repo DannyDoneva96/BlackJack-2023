@@ -1,4 +1,6 @@
 import './Game.scss'
+import { Link } from 'react-router-dom';
+
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
 import green from '../../assets/chips/20.png'
@@ -43,6 +45,7 @@ const [toggle, setToggle] = useToggle();
           </div>
         </footer>)}
       </div>
+      <button className="btn-main-menu"><Link  to="/" className="link-home">MAIN MENU</Link></button>
     </div>
   )
 }
