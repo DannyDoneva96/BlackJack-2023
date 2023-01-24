@@ -1,3 +1,6 @@
+# Work in progress 23.01.23 - present
+
+
 # BlackJack-2023
 It is the most widely played casino banking game in the world.
 
