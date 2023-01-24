@@ -16,8 +16,6 @@ const Game = () => {
 
   return (
     <div>
-
-
       <div className="block">
 
         <button
