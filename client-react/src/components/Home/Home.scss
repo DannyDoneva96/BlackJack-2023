@@ -46,3 +46,10 @@ transition: all 0.7s ease-in-out;
     border: 1px solid rgba(223,190,106,0);
     background-position: 99% 50%;
 }
+
+.link-home{
+    color: rgba(223, 190, 106, 0.7);
+}
+.link-home:hover{
+    color: black;
+}
