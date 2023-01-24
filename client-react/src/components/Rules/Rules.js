@@ -1,4 +1,6 @@
 import './Rules.scss'
+import { Link } from 'react-router-dom';
+
 
 import React from 'react'
 
@@ -53,6 +55,8 @@ const Rules = () => {
         </div>
 
       </div>
+      <button className="btn-main-menu"><Link  to="/" className="link-home">MAIN MENU</Link></button>
+
     </div>
   )
 }
