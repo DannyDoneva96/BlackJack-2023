@@ -1,9 +1,9 @@
 import './Game.scss'
-import darkBlue from '../../assets/chips/dark-blue-chip.png'
-import grey from '../../assets/chips/grey-chip.png'
-import green from '../../assets/chips/green-chip.png'
-import red from '../../assets/chips/red-chip-removebg-preview.png'
-import purple from '../../assets/chips/purple-chip.png'
+import darkBlue from '../../assets/chips/5.png'
+import grey from '../../assets/chips/10.png'
+import green from '../../assets/chips/20.png'
+import red from '../../assets/chips/50.png'
+import purple from '../../assets/chips/100.png'
 
 import React from 'react'
 
