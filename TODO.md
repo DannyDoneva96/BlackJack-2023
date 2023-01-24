@@ -1,5 +1,5 @@
 - [x] Install dependancies - @Redux/Toolkit
-- [ ] Homepage - implement menu buttons, logic for buttons + routing and loding animation - and more
+- [x] Homepage - implement menu buttons, logic for buttons + routing and loding animation - and more
   - [ ] Play now
   - [ ] Options
   - [ ] Rules

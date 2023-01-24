@@ -36,3 +36,10 @@ Split: Create two hands from a starting hand where both cards are the same value
 Signal: Place additional chips next to the original bet outside the betting box and point with two fingers spread into a V formation.
 Surrender: Forfeit half the bet and end the hand immediately. This option is only available at some tables in some casinos, and the option is only available as the first decision.
 Signal: Spoken; there are no standard signals.
+
+# Credits 
+
+
+Text Ring Loading Animation by Jon Kantner- https://codepen.io/jkantner/pen/qBdBJxY
+
+HTML CSS Border Animation with Gradient Shadow -https://www.csscodelab.com/html-css-border-animation-gradient-shadow/
