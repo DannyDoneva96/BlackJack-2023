@@ -3,7 +3,9 @@ import './Settings.scss'
 const Settings = () => {
   return (
     <div>
-      
+      <div className="block">
+        
+      </div>
     </div>
   )
 }
