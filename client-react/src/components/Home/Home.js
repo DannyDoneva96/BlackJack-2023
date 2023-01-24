@@ -8,7 +8,7 @@ const Home = () => {
       <div className="main-content">
         <section className="menu">
           <div className="container-to-fl">
-          <button className="options"><Link  to="/" className="link-home">PLAY</Link></button>
+          <button className="options"><Link  to="/game" className="link-home">PLAY</Link></button>
           <button className="options"><Link  to="/settings" className="link-home">Settings</Link></button>
           <button className="options"><Link  to="/rules" className="link-home">Rules</Link></button></div>
         </section>
