@@ -1,9 +1,19 @@
 import './App.scss';
+import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home'
+import Game from './components/Game.js/Game'
+import Settings from './components/Settings/Settings'
+import Loading from './components/Loading/Loading'
 function App() {
   return (
     <div className="App">
-      <Home/>
+     <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/loading" element={<Loading />} />
+
+       </Routes>
     </div>
   );
 }
