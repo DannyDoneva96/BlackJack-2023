@@ -60,6 +60,8 @@ const Game = () => {
         </button>
         {toggleValue
           ?
+          //TODO:
+          // TRQBVA DA SE SLOJI LOGIKATA DOLU KOGATO SE ZALAGAT CHIPOVETE, BROIKATA DA NAMALQVA SPORED ZALOGA!
           <footer className="chips-container">
             <div className="chips">
               <div>
