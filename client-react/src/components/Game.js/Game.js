@@ -33,23 +33,23 @@ const Game = () => {
           <footer className="chips-container">
             <div className="chips">
               <div>
-                <p>{chipCounter.chipFive}</p>
+                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipFive}</p>
                 <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFive())} />
               </div>
               <div>
-                <p>{chipCounter.chipTen}</p>
+                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipTen}</p>
                 <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTen())} />
               </div>
               <div>
-                <p>{chipCounter.chipTwenty}</p>
+                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipTwenty}</p>
                 <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwenty())} />
               </div>
               <div>
-                {chipCounter.chipFifty}
+                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipFifty}</p>
                 <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFifty())} />
               </div>
               <div>
-                {chipCounter.chipHundred}
+                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipHundred}</p>
                 <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundred())} />
               </div>
 
