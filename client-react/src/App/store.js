@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import menuReducer from "../features/menu/menuSlice";
+import playerReducer from "../features/gamePlay/playerSlice";
 
 export const store = configureStore({
     reducer: {
-        mainMenu: menuReducer
+        playerChipCounter: playerReducer
     }
 });
