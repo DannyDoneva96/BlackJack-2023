@@ -1,7 +1,7 @@
 import './Game.scss'
-
+import CashPopUp from '../ChashPopUp/CashPopUp'
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
   chipFiveAdd,
@@ -25,20 +25,30 @@ import purple from '../../assets/chips/100.png'
 const Game = () => {
 
   const [toggleValue, setToggleValue] = useState(false);
+  const [isVisible, setisVisible] = useState(true);
+
   const chipAdd = useSelector((state) => state.playerChipAdd);
   const dispatch = useDispatch();
 
 
   return (
+
+
+
     <div>
-      <div className="block">
+
+      {isVisible ? < CashPopUp setisVisible={setisVisible} /> : null}
+
+      <div className={"block" + (isVisible ? 'active' : '')}>
+
+
 
         <button
           onClick={() => setToggleValue(state => !state)}
           className="btn-secondary">
           Show Bets
         </button>
-        <button
+        {/* <button
           onClick={() => dispatch(chipFiveAdd())}
           className="btn-secondary">
           Add five of each chips
@@ -57,7 +67,7 @@ const Game = () => {
           onClick={() => dispatch(chipFiftyAdd())}
           className="btn-secondary">
           Add fifty of each chips
-        </button>
+        </button> */}
         {toggleValue
           ?
           //TODO:
