@@ -14,7 +14,7 @@
 2. [ ] PlayerCardSlot component - implement logic for player side, betting, and play option
 3. [ ] DealerCardSlot component - implement logic for dealer side, dealing and  options
 4. [ ] Game result component - implement result from current deal - points + info if the player wins or loses
-5. [ ]Cash out - Pop up with are you sure? and if yes - will be showed section with some calculations like :
+5. [ ]Cash out - Pop up with are you sure? and if yes - will be shown section with some calculations like :
 -cash won - ...$
 -hands won - ...
 -highest bank-...$
