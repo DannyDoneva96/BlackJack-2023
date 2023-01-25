@@ -1,6 +1,9 @@
 import './Game.scss'
+
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { chipFive, chipTen, chipTwenty, chipFifty, chipHundred } from "../../features/gamePlay/playerSlice";
 
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
@@ -9,10 +12,12 @@ import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
 
-
 const Game = () => {
 
   const [toggleValue, setToggleValue] = useState(false);
+  const chipCounter = useSelector((state) => state.playerChipCounter);
+  const dispatch = useDispatch();
+
 
   return (
     <div>
@@ -27,12 +32,26 @@ const Game = () => {
           ?
           <footer className="chips-container">
             <div className="chips">
-
-              <img className='chips-bottom' src={darkBlue} alt="" />
-              <img className='chips-bottom' src={grey} alt="" />
-              <img className='chips-bottom' src={green} alt="" />
-              <img className='chips-bottom' src={red} alt="" />
-              <img className='chips-bottom' src={purple} alt="" />
+              <div>
+                <p>{chipCounter.chipFive}</p>
+                <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFive())} />
+              </div>
+              <div>
+                <p>{chipCounter.chipTen}</p>
+                <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTen())} />
+              </div>
+              <div>
+                <p>{chipCounter.chipTwenty}</p>
+                <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwenty())} />
+              </div>
+              <div>
+                {chipCounter.chipFifty}
+                <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFifty())} />
+              </div>
+              <div>
+                {chipCounter.chipHundred}
+                <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundred())} />
+              </div>
 
             </div>
           </footer>
