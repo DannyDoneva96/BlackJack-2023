@@ -3,7 +3,17 @@ import './Game.scss'
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { chipFive, chipTen, chipTwenty, chipFifty, chipHundred } from "../../features/gamePlay/playerSlice";
+import {
+  chipFiveAdd,
+  chipTenAdd,
+  chipTwentyAdd,
+  chipFiftyAdd,
+  chipFiveRemove,
+  chipTenRemove,
+  chipTwentyRemove,
+  chipFiftyRemove,
+  chipHundredRemove
+} from "../../features/gamePlay/playerSlice";
 
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
@@ -15,7 +25,7 @@ import purple from '../../assets/chips/100.png'
 const Game = () => {
 
   const [toggleValue, setToggleValue] = useState(false);
-  const chipCounter = useSelector((state) => state.playerChipCounter);
+  const chipAdd = useSelector((state) => state.playerChipAdd);
   const dispatch = useDispatch();
 
 
@@ -25,32 +35,54 @@ const Game = () => {
 
         <button
           onClick={() => setToggleValue(state => !state)}
-          class="btn-secondary">
+          className="btn-secondary">
           Show Bets
+        </button>
+        <button
+          onClick={() => dispatch(chipFiveAdd())}
+          className="btn-secondary">
+          Add five of each chips
+        </button>
+        <button
+          onClick={() => dispatch(chipTenAdd())}
+          className="btn-secondary">
+          Add ten of each chips
+        </button>
+        <button
+          onClick={() => dispatch(chipTwentyAdd())}
+          className="btn-secondary">
+          Add twenty of each chips
+        </button>
+        <button
+          onClick={() => dispatch(chipFiftyAdd())}
+          className="btn-secondary">
+          Add fifty of each chips
         </button>
         {toggleValue
           ?
+          //TODO:
+          // TRQBVA DA SE SLOJI LOGIKATA DOLU KOGATO SE ZALAGAT CHIPOVETE, BROIKATA DA NAMALQVA SPORED ZALOGA!
           <footer className="chips-container">
             <div className="chips">
               <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipFive}</p>
-                <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFive())} />
+                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFive}</p>
+                <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFiveRemove())} />
               </div>
               <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipTen}</p>
-                <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTen())} />
+                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTen}</p>
+                <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTenRemove())} />
               </div>
               <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipTwenty}</p>
-                <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwenty())} />
+                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTwenty}</p>
+                <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwentyRemove())} />
               </div>
               <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipFifty}</p>
-                <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFifty())} />
+                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFifty}</p>
+                <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFiftyRemove())} />
               </div>
               <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipCounter.chipHundred}</p>
-                <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundred())} />
+                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipHundred}</p>
+                <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundredRemove())} />
               </div>
 
             </div>
