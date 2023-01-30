@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { Suspense, lazy, useState } from 'react'
 
@@ -55,7 +56,7 @@ const Game = () => {
           {cardDeck?.map((card, i) => (
             i < 1
               ?
-              <CardComponent key={i} card={card} i={i} />
+              <CardComponent key={nanoid(52)} card={card} />
               : null
           ))}
 
