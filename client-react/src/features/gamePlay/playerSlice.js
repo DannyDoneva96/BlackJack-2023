@@ -6,7 +6,8 @@ const initialState = {
     chipTwenty: 0,
     chipFifty: 0,
     chipHundred: 0,
-    hasChips: false
+    hasChips: false,
+    bet: []
 }
 
 export const playerChipsSliceAdd = createSlice({
@@ -48,23 +49,43 @@ export const playerChipsSliceAdd = createSlice({
 
         chipFiveRemove: (state) => {
             if (state.chipFive === 0) return
+            state.bet.push(5)
             state.chipFive -= 1;
         },
         chipTenRemove: (state) => {
             if (state.chipTen === 0) return
+            state.bet.push(10)
             state.chipTen -= 1;
         },
         chipTwentyRemove: (state) => {
             if (state.chipTwenty === 0) return
+            state.bet.push(20)
             state.chipTwenty -= 1;
         },
         chipFiftyRemove: (state) => {
             if (state.chipFifty === 0) return
+            state.bet.push(50)
             state.chipFifty -= 1;
         },
         chipHundredRemove: (state) => {
             if (state.chipHundred === 0) return
+            state.bet.push(100)
             state.chipHundred -= 1;
+        },
+        LastOneRemove: (state) => {
+
+            let last = state.bet.pop()
+            if (last == 5) {
+                state.chipFive += 1
+            } else if (last == 10) {
+                state.chipTen += 1
+            } else if (last == 20) {
+                state.chipTwenty += 1
+            } else if (last == 50) {
+                state.chipFifty += 1
+            } else if (last == 100) { state.chipHundred += 1 }
+
+
         }
     }
 });
@@ -78,7 +99,8 @@ export const {
     chipTenRemove,
     chipTwentyRemove,
     chipFiftyRemove,
-    chipHundredRemove } = playerChipsSliceAdd.actions;
+    chipHundredRemove,
+    LastOneRemove } = playerChipsSliceAdd.actions;
 
 export const playerChips = (state) => state.playerChipAdd;
 export default playerChipsSliceAdd.reducer;
