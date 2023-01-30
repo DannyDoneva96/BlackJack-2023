@@ -1,13 +1,9 @@
 import './Game.scss'
 import CashPopUp from '../ChashPopUp/CashPopUp'
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  chipFiveAdd,
-  chipTenAdd,
-  chipTwentyAdd,
-  chipFiftyAdd,
   chipFiveRemove,
   chipTenRemove,
   chipTwentyRemove,
@@ -31,6 +27,7 @@ const Game = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+ 
 
     let ifAny = false
     ifAny = Object.entries(chipAdd).some(chip => {
@@ -42,12 +39,28 @@ const Game = () => {
       setisVisible(false);
     }
   }, []);
+     let ifAny = false
+
+
+      ifAny= Object.entries(chipAdd).some(chip => {if(chip[1] !== 0  && chip[1] !==undefined){
+           return true;
+     }} )
+
+     if(ifAny) { setisVisible(false);
+     }
+
+  },[]);
+
 
   return (
+
 
     <div>
       {isVisible ? < CashPopUp setisVisible={setisVisible} /> : null}
       <div className={"block" + (isVisible ? 'active' : '')}>
+
+
+
         <button
           onClick={() => setToggleValue(state => !state)}
           className="btn-secondary">
