@@ -16,6 +16,8 @@ import {
   playerChips
 } from "../../features/gamePlay/playerSlice";
 
+import randomCard from "../../assets/cards/K/king of clubs.png"
+import cardsBackSide from '../../assets/images/back-removebg-preview.png'
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
 import green from '../../assets/chips/20.png'
@@ -52,6 +54,24 @@ const Game = () => {
             <CashPopUp setisVisible={setisVisible} />
             : null
           }
+ <section className="game-field">
+          <div className='dealers-cards' >
+            <div className="dealercardscontainer">
+              {/* static version  */}
+              <img className='card' src={cardsBackSide} alt="" />
+              <img className='card' src={randomCard} alt="" />
+            </div>
+          </div>
+          <div className='game-options'>
+            <button>Hit</button>
+            <button>Stand</button>
+
+          </div>
+          <div className='players-cards'>
+            <img className='card' src={randomCard} alt="" />
+            <img className='card' src={randomCard} alt="" />
+          </div>
+        </section>
 
           {cardDeck?.map((card, i) => (
             i < 1
