@@ -29,7 +29,21 @@ const Game = () => {
 
   const chipAdd = useSelector((state) => state.playerChipAdd);
   const dispatch = useDispatch();
+ 
+  useEffect(() => {
+ 
 
+     let ifAny = false
+
+
+      ifAny= Object.entries(chipAdd).some(chip => {if(chip[1] !== 0  && chip[1] !==undefined){
+           return true;
+     }} )
+
+     if(ifAny) { setisVisible(false);
+     }
+
+  },[]);
 
   return (
 
