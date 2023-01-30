@@ -1,14 +1,18 @@
-import './Game.scss'
-import CashPopUp from '../ChashPopUp/CashPopUp'
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import React, { Suspense, lazy, useState } from 'react'
+
+import './Game.scss'
+import Loading from "../Loading/Loading";
+
+import { getCardDeck } from '../../features/cardDeck/cardDeckSlice';
 import {
   chipFiveRemove,
   chipTenRemove,
   chipTwentyRemove,
   chipFiftyRemove,
-  chipHundredRemove
+  chipHundredRemove,
+  playerChips
 } from "../../features/gamePlay/playerSlice";
 
 import darkBlue from '../../assets/chips/5.png'
@@ -17,84 +21,83 @@ import green from '../../assets/chips/20.png'
 import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
+const CardComponent = lazy(() => import("./CardDeckComp.js"));
+const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
 const Game = () => {
 
-  const [toggleValue, setToggleValue] = useState(false);
+  const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
 
-  const chipAdd = useSelector((state) => state.playerChipAdd);
+  const chipAdd = useSelector(playerChips);
+  const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
 
   return (
     <div>
 
-      {isVisible ? < CashPopUp setisVisible={setisVisible} /> : null}
-
-      <div className={"block" + (isVisible ? 'active' : '')}>
+      <div className="block">
 
         <button
           onClick={() => setToggleValue(state => !state)}
           className="btn-secondary">
           Show Bets
         </button>
-        {/* <button
-          onClick={() => dispatch(chipFiveAdd())}
-          className="btn-secondary">
-          Add five of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTenAdd())}
-          className="btn-secondary">
-          Add ten of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTwentyAdd())}
-          className="btn-secondary">
-          Add twenty of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipFiftyAdd())}
-          className="btn-secondary">
-          Add fifty of each chips
-        </button> */}
-        {toggleValue
-          ?
-          //TODO:
-          // TRQBVA DA SE SLOJI LOGIKATA DOLU KOGATO SE ZALAGAT CHIPOVETE, BROIKATA DA NAMALQVA SPORED ZALOGA!
-          <footer className="chips-container">
-            <div className="chips">
-              <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFive}</p>
-                <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFiveRemove())} />
-              </div>
-              <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTen}</p>
-                <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTenRemove())} />
-              </div>
-              <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTwenty}</p>
-                <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwentyRemove())} />
-              </div>
-              <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFifty}</p>
-                <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFiftyRemove())} />
-              </div>
-              <div>
-                <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipHundred}</p>
-                <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundredRemove())} />
-              </div>
 
-            </div>
-          </footer>
-          :
-          null
-        }
-      </div>
+        <Suspense fallback={<Loading />}>
+
+          {isVisible && !chipAdd.hasChips
+            ?
+            <CashPopUp setisVisible={setisVisible} />
+            : null
+          }
+
+          {cardDeck?.map((card, i) => (
+            i < 1
+              ?
+              <CardComponent key={i} card={card} i={i} />
+              : null
+          ))}
+
+          {
+            toggleValue
+              ?
+              //TODO:
+              // TRQBVA DA SE SLOJI LOGIKATA DOLU KOGATO SE ZALAGAT CHIPOVETE, BROIKATA DA NAMALQVA SPORED ZALOGA!
+              <footer className="chips-container">
+                <div className="chips">
+                  <div>
+                    <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFive}</p>
+                    <img className='chips-bottom' src={darkBlue} alt="" onClick={() => dispatch(chipFiveRemove())} />
+                  </div>
+                  <div>
+                    <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTen}</p>
+                    <img className='chips-bottom' src={grey} alt="" onClick={() => dispatch(chipTenRemove())} />
+                  </div>
+                  <div>
+                    <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipTwenty}</p>
+                    <img className='chips-bottom' src={green} alt="" onClick={() => dispatch(chipTwentyRemove())} />
+                  </div>
+                  <div>
+                    <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipFifty}</p>
+                    <img className='chips-bottom' src={red} alt="" onClick={() => dispatch(chipFiftyRemove())} />
+                  </div>
+                  <div>
+                    <p className="chip-count" style={{ color: "white" }}>{chipAdd.chipHundred}</p>
+                    <img className='chips-bottom' src={purple} alt="" onClick={() => dispatch(chipHundredRemove())} style={{}} />
+                  </div>
+
+                </div>
+              </footer>
+              :
+              null
+          }
+        </Suspense>
+      </div >
       <button className="btn-main-menu">
         <Link to="/" className="link-home">MAIN MENU</Link>
       </button>
-    </div>
+    </div >
   )
 }
 
