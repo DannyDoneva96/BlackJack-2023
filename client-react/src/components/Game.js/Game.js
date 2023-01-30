@@ -11,6 +11,8 @@ import {
   chipHundredRemove
 } from "../../features/gamePlay/playerSlice";
 
+import randomCard from "../../assets/cards/K/king of clubs.png"
+import cardsBackSide from '../../assets/images/back-removebg-preview.png'
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
 import green from '../../assets/chips/20.png'
@@ -49,33 +51,30 @@ const Game = () => {
       {isVisible ? < CashPopUp setisVisible={setisVisible} /> : null}
       <div className={"block" + (isVisible ? 'active' : '')}>
 
-
-
         <button
           onClick={() => setToggleValue(state => !state)}
           className="btn-secondary">
           Show Bets
         </button>
-        {/* <button
-          onClick={() => dispatch(chipFiveAdd())}
-          className="btn-secondary">
-          Add five of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTenAdd())}
-          className="btn-secondary">
-          Add ten of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTwentyAdd())}
-          className="btn-secondary">
-          Add twenty of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipFiftyAdd())}
-          className="btn-secondary">
-          Add fifty of each chips
-        </button> */}
+        <section className="game-field">
+        <div className='dealers-cards' >
+          <div className="dealercardscontainer">
+            {/* static version  */}
+            <img className='card' src={cardsBackSide} alt="" />
+            <img className='card' src={randomCard} alt="" />
+          </div>
+        </div>
+        <div className='game-options'>
+          <button>Hit</button>
+          <button>Stand</button>
+
+        </div>
+        <div className='players-cards'>
+        <img className='card' src={randomCard} alt="" />
+        <img className='card' src={randomCard} alt="" />
+        </div>
+        </section>
+
         {toggleValue
           ?
           //TODO:

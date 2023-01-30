@@ -69,10 +69,54 @@
     transition: all 0.7s ease-in-out;
 }
 
+.game-field{
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap:2rem;
+}
+
+.game-options {
+  display: flex;
+  gap: 25rem;
+  justify-content: center;
+  width: 100%;
+  flex-direction: row;
+
+}
+.game-options button{
+  color: rgba(223, 190, 106, 0.7);
+  margin-top: 1rem;
+  width: 6rem;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: rgba(223, 190, 106, 0.7);
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(223, 190, 106, 0.7);
+  border-radius: 30px;
+}
+.game-options button:hover{
+color: #000;
+background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8));
+border: 1px solid black;
+-webkit-box-shadow: 1px 1px 129px 45px rgba(223, 190, 106, 0.8);
+-moz-box-shadow: 1px 1px 129px 45px  rgba(146, 111, 52, 0.8);
+box-shadow: 1px 1px 129px 45px  rgba(146, 111, 52, 0.8);
+}
+
 .btn-main-menu:hover{
     color: black;
     border: 1px solid rgba(223, 190, 106, 0);
     background-position: 99% 50%;
 
 }
-  
+  .dealercardscontainer,.players-cards{
+    display: flex;
+  }
+.card{
+  width: 120px;
+}
+
