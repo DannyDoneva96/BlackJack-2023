@@ -1,7 +1,7 @@
 import './Game.scss'
 import CashPopUp from '../ChashPopUp/CashPopUp'
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
   chipFiveRemove,
@@ -11,6 +11,8 @@ import {
   chipHundredRemove
 } from "../../features/gamePlay/playerSlice";
 
+import randomCard from "../../assets/cards/K/king of clubs.png"
+import cardsBackSide from '../../assets/images/back-removebg-preview.png'
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
 import green from '../../assets/chips/20.png'
@@ -25,29 +27,28 @@ const Game = () => {
 
   const chipAdd = useSelector((state) => state.playerChipAdd);
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
- 
 
 
-     let ifAny = false
+    let ifAny = false
+    ifAny = Object.entries(chipAdd).some(chip => {
+      if (chip[1] !== 0 && chip[1] !== undefined) {
+        return true;
+      }
+    })
+    if (ifAny) {
+      setisVisible(false);
+    }
+  }, []);
 
-
-      ifAny= Object.entries(chipAdd).some(chip => {if(chip[1] !== 0  && chip[1] !==undefined){
-           return true;
-     }} )
-
-     if(ifAny) { setisVisible(false);
-     }
-
-  },[]);
 
 
   return (
+
+
     <div>
-
       {isVisible ? < CashPopUp setisVisible={setisVisible} /> : null}
-
       <div className={"block" + (isVisible ? 'active' : '')}>
 
         <button
@@ -55,26 +56,25 @@ const Game = () => {
           className="btn-secondary">
           Show Bets
         </button>
-        {/* <button
-          onClick={() => dispatch(chipFiveAdd())}
-          className="btn-secondary">
-          Add five of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTenAdd())}
-          className="btn-secondary">
-          Add ten of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipTwentyAdd())}
-          className="btn-secondary">
-          Add twenty of each chips
-        </button>
-        <button
-          onClick={() => dispatch(chipFiftyAdd())}
-          className="btn-secondary">
-          Add fifty of each chips
-        </button> */}
+        <section className="game-field">
+          <div className='dealers-cards' >
+            <div className="dealercardscontainer">
+              {/* static version  */}
+              <img className='card' src={cardsBackSide} alt="" />
+              <img className='card' src={randomCard} alt="" />
+            </div>
+          </div>
+          <div className='game-options'>
+            <button>Hit</button>
+            <button>Stand</button>
+
+          </div>
+          <div className='players-cards'>
+            <img className='card' src={randomCard} alt="" />
+            <img className='card' src={randomCard} alt="" />
+          </div>
+        </section>
+
         {toggleValue
           ?
           //TODO:
