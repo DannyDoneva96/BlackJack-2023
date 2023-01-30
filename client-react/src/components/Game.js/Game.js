@@ -1,7 +1,7 @@
 import './Game.scss'
 import CashPopUp from '../ChashPopUp/CashPopUp'
 import { Link } from 'react-router-dom';
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
   chipFiveRemove,
@@ -29,7 +29,7 @@ const Game = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
- 
+
 
     let ifAny = false
     ifAny = Object.entries(chipAdd).some(chip => {
@@ -41,7 +41,7 @@ const Game = () => {
       setisVisible(false);
     }
   }, []);
- 
+
 
 
   return (
@@ -57,22 +57,22 @@ const Game = () => {
           Show Bets
         </button>
         <section className="game-field">
-        <div className='dealers-cards' >
-          <div className="dealercardscontainer">
-            {/* static version  */}
-            <img className='card' src={cardsBackSide} alt="" />
+          <div className='dealers-cards' >
+            <div className="dealercardscontainer">
+              {/* static version  */}
+              <img className='card' src={cardsBackSide} alt="" />
+              <img className='card' src={randomCard} alt="" />
+            </div>
+          </div>
+          <div className='game-options'>
+            <button>Hit</button>
+            <button>Stand</button>
+
+          </div>
+          <div className='players-cards'>
+            <img className='card' src={randomCard} alt="" />
             <img className='card' src={randomCard} alt="" />
           </div>
-        </div>
-        <div className='game-options'>
-          <button>Hit</button>
-          <button>Stand</button>
-
-        </div>
-        <div className='players-cards'>
-        <img className='card' src={randomCard} alt="" />
-        <img className='card' src={randomCard} alt="" />
-        </div>
         </section>
 
         {toggleValue
