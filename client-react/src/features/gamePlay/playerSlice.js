@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     chipFive: 0,
     chipTen: 0,
@@ -8,7 +9,6 @@ const initialState = {
     chipHundred: 0,
     hasChips: false,
     bet: [],
-    
 }
 
 export const playerChipsSliceAdd = createSlice({
@@ -50,7 +50,7 @@ export const playerChipsSliceAdd = createSlice({
 
         chipFiveRemove: (state) => {
             if (state.chipFive === 0) return
-            state.bet.push(5)
+            state.bet.push(require('../../assets/chips/dark-blue-chip – Копие.png'))
             state.chipFive -= 1;
         },
         chipTenRemove: (state) => {
