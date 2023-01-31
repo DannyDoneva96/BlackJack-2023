@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     chipFive: 0,
     chipTen: 0,
@@ -7,7 +8,7 @@ const initialState = {
     chipFifty: 0,
     chipHundred: 0,
     hasChips: false,
-    bet: []
+    bet: [],
 }
 
 export const playerChipsSliceAdd = createSlice({
@@ -49,7 +50,7 @@ export const playerChipsSliceAdd = createSlice({
 
         chipFiveRemove: (state) => {
             if (state.chipFive === 0) return
-            state.bet.push(5)
+            state.bet.push(require('../../assets/chips/dark-blue-chip – Копие.png'))
             state.chipFive -= 1;
         },
         chipTenRemove: (state) => {
@@ -75,18 +76,17 @@ export const playerChipsSliceAdd = createSlice({
         LastOneRemove: (state) => {
 
             let last = state.bet.pop()
-            if (last == 5) {
+            if (last === 5) {
                 state.chipFive += 1
-            } else if (last == 10) {
+            } else if (last === 10) {
                 state.chipTen += 1
-            } else if (last == 20) {
+            } else if (last === 20) {
                 state.chipTwenty += 1
-            } else if (last == 50) {
+            } else if (last === 50) {
                 state.chipFifty += 1
-            } else if (last == 100) { state.chipHundred += 1 }
-
-
-        }
+            } else if (last === 100) { state.chipHundred += 1 }
+        },
+       
     }
 });
 
@@ -100,7 +100,8 @@ export const {
     chipTwentyRemove,
     chipFiftyRemove,
     chipHundredRemove,
-    LastOneRemove } = playerChipsSliceAdd.actions;
+    LastOneRemove ,
+    } = playerChipsSliceAdd.actions;
 
 export const playerChips = (state) => state.playerChipAdd;
 export default playerChipsSliceAdd.reducer;

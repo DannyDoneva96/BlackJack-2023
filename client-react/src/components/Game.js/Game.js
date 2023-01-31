@@ -5,6 +5,7 @@ import React, { Suspense, lazy, useState } from 'react'
 
 import './Game.scss'
 import Loading from "../Loading/Loading";
+import BetChipView from './BetChipView';
 
 import { getCardDeck } from '../../features/cardDeck/cardDeckSlice';
 import {
@@ -25,6 +26,8 @@ import green from '../../assets/chips/20.png'
 import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
+import darkBlueSingle from '../../assets/chips/dark-blue-chip – Копие.png'
+
 const CardComponent = lazy(() => import("./CardDeckComp.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
@@ -36,6 +39,8 @@ const Game = () => {
   const chipAdd = useSelector(playerChips);
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
+
+ 
 
   return (
     <div>
@@ -66,7 +71,12 @@ const Game = () => {
           <div className='game-options'>
             <button>Hit</button>
             {/* TODO: here must be an image of chip and on click to remove the last chip */}
-            <div onClick={() => dispatch(LastOneRemove())}>{chipAdd.bet}$</div>
+            <div className='div-cont-bet'>
+
+            <BetChipView  />
+
+            </div>
+            
             <button>Stand</button>
 
           </div>
@@ -76,12 +86,12 @@ const Game = () => {
           </div>
         </section>
 
-          {cardDeck?.map((card, i) => (
+          {/* {cardDeck?.map((card, i) => (
             i < 1
               ?
               <CardComponent key={nanoid(52)} card={card} />
               : null
-          ))}
+          ))} */}
 
           {
             toggleValue
@@ -91,10 +101,14 @@ const Game = () => {
               <footer className="chips-container">
                 <div className="chips">
                   <div>
-                    <img className='chips-bottom 5' src={darkBlue} style={ chipAdd.chipFive === 0 ? {display: "none"} : null}alt="" onClick={() => dispatch(chipFiveRemove())} />
+
+                  {/* <img id='single-blue' className={isSmallChipActive ? 'smallActive': 'small'} src={darkBlueSingle}  alt=""  /> */}
+                    <img className='chips-bottom' src={darkBlue} style={ chipAdd.chipFive === 0 ? {display: "none"} : null}alt="" onClick={() => dispatch(chipFiveRemove())} />
+                    
+
                   </div>
                   <div>
-                    <img className='chips-bottom 10' src={grey} alt="" style={ chipAdd.chipTen === 0 ? {display: "none"} : null} onClick={() => dispatch(chipTenRemove())} />
+                    <img className='chips-bottom' src={grey} alt="" style={ chipAdd.chipTen === 0 ? {display: "none"} : null} onClick={() => dispatch(chipTenRemove())} />
                   </div>
                   <div>
                     <img className='chips-bottom' src={green} alt="" style={ chipAdd.chipTwenty === 0 ? {display: "none"} : null} onClick={() => dispatch(chipTwentyRemove())} />
@@ -111,10 +125,14 @@ const Game = () => {
               :
               null
           }
+
         </Suspense>
+
       </div >
       <button className="btn-main-menu">
+
         <Link to="/" className="link-home">MAIN MENU</Link>
+
       </button>
     </div >
   )
