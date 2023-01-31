@@ -76,12 +76,12 @@ const Game = () => {
           </div>
         </section>
 
-          {cardDeck?.map((card, i) => (
+          {/* {cardDeck?.map((card, i) => (
             i < 1
               ?
               <CardComponent key={nanoid(52)} card={card} />
               : null
-          ))}
+          ))} */}
 
           {
             toggleValue
@@ -114,7 +114,9 @@ const Game = () => {
         </Suspense>
       </div >
       <button className="btn-main-menu">
+
         <Link to="/" className="link-home">MAIN MENU</Link>
+
       </button>
     </div >
   )
