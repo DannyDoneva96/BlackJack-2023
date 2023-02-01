@@ -27,19 +27,30 @@ import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
 
+import singleFive from '../../assets/chips/dark-blue-chip – Копие.png'
+import singleTen from '../../assets/chips/grey-chip – Копие.png'
+import singleGreen from '../../assets/chips/green-chip – Копие.png'
+
 const CardComponent = lazy(() => import("./CardDeckComp.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
+
 
 const Game = () => {
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
+  const [blueS, setBlue] = useState('small');
+  const [greyS, setGrey] = useState('small');
+  const [greenS, setGreen] = useState('small');
+
+
+
 
   const chipAdd = useSelector(playerChips);
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
 
- 
+
 
   return (
     <div>
@@ -59,31 +70,31 @@ const Game = () => {
             <CashPopUp setisVisible={setisVisible} />
             : null
           }
- <section className="game-field">
-          <div className='dealers-cards' >
-            <div className="dealercardscontainer">
-              {/* static version  */}
-              <img className='card' src={cardsBackSide} alt="" />
+          <section className="game-field">
+            <div className='dealers-cards' >
+              <div className="dealercardscontainer">
+                {/* static version  */}
+                <img className='card' src={cardsBackSide} alt="" />
+                <img className='card' src={randomCard} alt="" />
+              </div>
+            </div>
+            <div className='game-options'>
+              <button>Hit</button>
+              {/* TODO: here must be an image of chip and on click to remove the last chip */}
+              <div className='div-cont-bet'>
+
+                <BetChipView />
+
+              </div>
+
+              <button>Stand</button>
+
+            </div>
+            <div className='players-cards'>
+              <img className='card' src={randomCard} alt="" />
               <img className='card' src={randomCard} alt="" />
             </div>
-          </div>
-          <div className='game-options'>
-            <button>Hit</button>
-            {/* TODO: here must be an image of chip and on click to remove the last chip */}
-            <div className='div-cont-bet'>
-
-            <BetChipView   />
-
-            </div>
-            
-            <button>Stand</button>
-
-          </div>
-          <div className='players-cards'>
-            <img className='card' src={randomCard} alt="" />
-            <img className='card' src={randomCard} alt="" />
-          </div>
-        </section>
+          </section>
 
           {/* {cardDeck?.map((card, i) => (
             i < 1
@@ -99,24 +110,33 @@ const Game = () => {
               // TRQBVA DA SE SLOJI LOGIKATA DOLU KOGATO SE ZALAGAT CHIPOVETE, BROIKATA DA NAMALQVA SPORED ZALOGA!
               <footer className="chips-container">
                 <div className="chips">
+
+                {/* TODO:
+                DA OBSUDIM: Dali da ne napravim razlichen klas za vseki cvqt i suotvetno v animaciqta razlichni koordinati za premestvane */}
                   <div>
 
-                  {/* <img id='single-blue' className={isSmallChipActive ? 'smallActive': 'small'} src={darkBlueSingle}  alt=""  /> */}
-                    <img className='chips-bottom' src={darkBlue} style={ chipAdd.chipFive === 0 ? {display: "none"} : null}alt="" onClick={() => dispatch(chipFiveRemove())} />
-                    
+                    <img id='single-blue' className={blueS} src={singleFive} alt="" />
+
+                    <img className='chips-bottom' src={darkBlue} style={chipAdd.chipFive === 0 ? { display: "none" } : null} alt=""
+                      onClick={() => [setBlue('smallActive'), setTimeout(dispatch, 1000, chipFiveRemove()), setTimeout(setBlue, 1000, 'small')]}
+                    />
 
                   </div>
                   <div>
-                    <img className='chips-bottom' src={grey} alt="" style={ chipAdd.chipTen === 0 ? {display: "none"} : null} onClick={() => dispatch(chipTenRemove())} />
+                    <img id='single-blue' className={greyS} src={singleTen} alt="" />
+
+                    <img className='chips-bottom' src={grey} alt="" style={chipAdd.chipTen === 0 ? { display: "none" } : null} onClick={() => [setGrey('smallActive'), setTimeout(dispatch, 1000, chipTenRemove()), setTimeout(setGrey, 1000, 'small')]} />
                   </div>
                   <div>
-                    <img className='chips-bottom' src={green} alt="" style={ chipAdd.chipTwenty === 0 ? {display: "none"} : null} onClick={() => dispatch(chipTwentyRemove())} />
+                  <img id='single-blue' className={greenS} src={singleGreen} alt="" />
+
+                    <img className='chips-bottom' src={green} alt="" style={chipAdd.chipTwenty === 0 ? { display: "none" } : null} onClick={() => [setGreen('smallActive'), setTimeout(dispatch, 1000, chipTwentyRemove()), setTimeout(setGreen, 1000, 'small')]} />
                   </div>
                   <div>
-                    <img className='chips-bottom' src={red} alt="" style={ chipAdd.chipFifty === 0 ? {display: "none"} : null} onClick={() => dispatch(chipFiftyRemove())} />
+                    <img className='chips-bottom' src={red} alt="" style={chipAdd.chipFifty === 0 ? { display: "none" } : null} onClick={() => dispatch(chipFiftyRemove())} />
                   </div>
                   <div>
-                    <img className='chips-bottom' src={purple} alt="" style={ chipAdd.chipHundred === 0 ? {display: "none"} : null} onClick={() => dispatch(chipHundredRemove())}  />
+                    <img className='chips-bottom' src={purple} alt="" style={chipAdd.chipHundred === 0 ? { display: "none" } : null} onClick={() => dispatch(chipHundredRemove())} />
                   </div>
 
                 </div>

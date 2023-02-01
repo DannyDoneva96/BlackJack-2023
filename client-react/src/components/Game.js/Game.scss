@@ -136,11 +136,12 @@
   position: absolute;
   width: 50px;
   transform: translate(21px, 23px);
-    animation: move 0.5s linear;
-    animation-fill-mode: forwards;
+    animation: move 0.8s linear;
+    animation-fill-mode:none;
 }
 @keyframes move {
   0% {
+    display:block;
     transform: translate(21px, 23px);
   }
 
@@ -161,8 +162,8 @@
 }
 
 .div-cont-bet{
-  width: 300px;
-height: 150px;
+  width: 256px;
+  height: 67px;
 position: relative;
 
 }
