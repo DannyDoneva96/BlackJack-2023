@@ -5,8 +5,6 @@ import {
     LastOneRemove, playerChips,
 } from "../../features/gamePlay/playerSlice";
 
-import singleFive from '../../assets/chips/dark-blue-chip – Копие.png'
-import singleTen from '../../assets/chips/grey-chip – Копие.png'
 
 const BetChipView = () => {
 

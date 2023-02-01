@@ -27,6 +27,10 @@ import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
 
+import singleFive from '../../assets/chips/dark-blue-chip – Копие.png'
+import singleTen from '../../assets/chips/grey-chip – Копие.png'
+
+
 const CardComponent = lazy(() => import("./CardDeckComp.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
@@ -34,6 +38,8 @@ const Game = () => {
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
+  const [styleAnimChip, setStyleAnimChip] = useState('small');
+
 
   const chipAdd = useSelector(playerChips);
   const cardDeck = useSelector(getCardDeck);
@@ -101,8 +107,11 @@ const Game = () => {
                 <div className="chips">
                   <div>
 
-                  {/* <img id='single-blue' className={isSmallChipActive ? 'smallActive': 'small'} src={darkBlueSingle}  alt=""  /> */}
-                    <img className='chips-bottom' src={darkBlue} style={ chipAdd.chipFive === 0 ? {display: "none"} : null}alt="" onClick={() => dispatch(chipFiveRemove())} />
+                   <img id='single-blue'  className={styleAnimChip} src={singleFive}  alt=""  /> 
+
+                    <img className='chips-bottom' src={darkBlue} style={ chipAdd.chipFive === 0 ? {display: "none"} : null}alt="" 
+                    onClick={() => [ setStyleAnimChip('smallActive'),setTimeout(dispatch,1000,chipFiveRemove()),setTimeout(setStyleAnimChip,1000,'small')]}
+                     />
                     
 
                   </div>
