@@ -26,7 +26,6 @@ import green from '../../assets/chips/20.png'
 import red from '../../assets/chips/50.png'
 import purple from '../../assets/chips/100.png'
 
-import darkBlueSingle from '../../assets/chips/dark-blue-chip – Копие.png'
 
 const CardComponent = lazy(() => import("./CardDeckComp.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
@@ -73,7 +72,7 @@ const Game = () => {
             {/* TODO: here must be an image of chip and on click to remove the last chip */}
             <div className='div-cont-bet'>
 
-            <BetChipView  />
+            <BetChipView   />
 
             </div>
             
