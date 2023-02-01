@@ -55,22 +55,22 @@ export const playerChipsSliceAdd = createSlice({
         },
         chipTenRemove: (state) => {
             if (state.chipTen === 0) return
-            state.bet.push(10)
+            state.bet.push(require('../../assets/chips/grey-chip – Копие.png'))
             state.chipTen -= 1;
         },
         chipTwentyRemove: (state) => {
             if (state.chipTwenty === 0) return
-            state.bet.push(20)
+            state.bet.push(require('../../assets/chips/green-chip – Копие.png'))
             state.chipTwenty -= 1;
         },
         chipFiftyRemove: (state) => {
             if (state.chipFifty === 0) return
-            state.bet.push(50)
+            state.bet.push(require('../../assets/chips/red-chip-removebg-preview – Копие.png'))
             state.chipFifty -= 1;
         },
         chipHundredRemove: (state) => {
             if (state.chipHundred === 0) return
-            state.bet.push(100)
+            state.bet.push(require('../../assets/chips/purple-chip – Копие.png'))
             state.chipHundred -= 1;
         },
         LastOneRemove: (state) => {
