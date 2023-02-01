@@ -12,22 +12,15 @@ const BetChipView = () => {
 
     const dispatch = useDispatch();
     const chipAdd = useSelector(playerChips);
-    const [betsImages, setBetImages] = useState(chipAdd.bet.length>0? chipAdd.bet : [])
-    
-    
 
-    // chipAdd.bet.forEach((bet) => {
-    //     if (bet === 5) {
-    //         
-    //     } else if (bet === 10) {
-    //         setBetImages(state => [...state, singleTen])
-    //     }
-    // })
+    let counter = 1
 
     return (
-        <div onClick={() => dispatch(LastOneRemove())}>
-      
-            {chipAdd.bet.map((x) => <img key={nanoid(5)} className="smallChipsBets" src={x} alt="" />
+        <div className="chip-bet-fl-c"  onClick={() => dispatch(LastOneRemove())}>
+            
+            {chipAdd.bet.map((x) =><img key={nanoid(5)} className="smallChipsBets" src={x} 
+             style={{position:'absolute',left:`${counter+=20}px`}} alt="" />
+
             )}
 
         </div>
