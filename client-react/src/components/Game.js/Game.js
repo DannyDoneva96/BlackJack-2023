@@ -30,6 +30,8 @@ import purple from '../../assets/chips/100.png'
 import singleFive from '../../assets/chips/dark-blue-chip – Копие.png'
 import singleTen from '../../assets/chips/grey-chip – Копие.png'
 import singleGreen from '../../assets/chips/green-chip – Копие.png'
+import singleRed from '../../assets/chips/red-chip-removebg-preview – Копие.png'
+import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 
 const CardComponent = lazy(() => import("./CardDeckComp.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
@@ -42,6 +44,8 @@ const Game = () => {
   const [blueS, setBlue] = useState('small');
   const [greyS, setGrey] = useState('small');
   const [greenS, setGreen] = useState('small');
+  const [redS, setRed] = useState('small');
+  const [purpleS, setPurple] = useState('small');
 
 
 
@@ -80,9 +84,8 @@ const Game = () => {
             </div>
             <div className='game-options'>
               <button>Hit</button>
-              {/* TODO: here must be an image of chip and on click to remove the last chip */}
               <div className='div-cont-bet'>
-
+                  <p className='total'>{chipAdd.total}$</p>
                 <BetChipView />
 
               </div>
@@ -118,25 +121,30 @@ const Game = () => {
                     <img id='single-blue' className={blueS} src={singleFive} alt="" />
 
                     <img className='chips-bottom' src={darkBlue} style={chipAdd.chipFive === 0 ? { display: "none" } : null} alt=""
-                      onClick={() => [setBlue('smallActive'), setTimeout(dispatch, 1000, chipFiveRemove()), setTimeout(setBlue, 1000, 'small')]}
+                      onClick={() => [setBlue('smallActiveBlue'), setTimeout(dispatch, 1000, chipFiveRemove()), setTimeout(setBlue, 1000, 'small')]}
                     />
 
                   </div>
                   <div>
                     <img id='single-blue' className={greyS} src={singleTen} alt="" />
 
-                    <img className='chips-bottom' src={grey} alt="" style={chipAdd.chipTen === 0 ? { display: "none" } : null} onClick={() => [setGrey('smallActive'), setTimeout(dispatch, 1000, chipTenRemove()), setTimeout(setGrey, 1000, 'small')]} />
+                    <img className='chips-bottom' src={grey} alt="" style={chipAdd.chipTen === 0 ? { display: "none" } : null} onClick={() => [setGrey('smallActiveGrey'), setTimeout(dispatch, 1000, chipTenRemove()), setTimeout(setGrey, 1000, 'small')]} />
                   </div>
                   <div>
                   <img id='single-blue' className={greenS} src={singleGreen} alt="" />
 
-                    <img className='chips-bottom' src={green} alt="" style={chipAdd.chipTwenty === 0 ? { display: "none" } : null} onClick={() => [setGreen('smallActive'), setTimeout(dispatch, 1000, chipTwentyRemove()), setTimeout(setGreen, 1000, 'small')]} />
+                    <img className='chips-bottom' src={green} alt="" style={chipAdd.chipTwenty === 0 ? { display: "none" } : null} onClick={() => [setGreen('smallActiveGreen'), setTimeout(dispatch, 1000, chipTwentyRemove()), setTimeout(setGreen, 1000, 'small')]} />
+                  </div>
+
+                  <div>
+                  <img id='single-blue' className={redS} src={singleRed} alt="" />
+
+                    <img className='chips-bottom' src={red} alt="" style={chipAdd.chipFifty === 0 ? { display: "none" } : null} onClick={() => [setRed('smallActiveRed'), setTimeout(dispatch, 1000, chipFiftyRemove()), setTimeout(setRed, 1000, 'small')]}/>
                   </div>
                   <div>
-                    <img className='chips-bottom' src={red} alt="" style={chipAdd.chipFifty === 0 ? { display: "none" } : null} onClick={() => dispatch(chipFiftyRemove())} />
-                  </div>
-                  <div>
-                    <img className='chips-bottom' src={purple} alt="" style={chipAdd.chipHundred === 0 ? { display: "none" } : null} onClick={() => dispatch(chipHundredRemove())} />
+                  <img id='single-blue' className={purpleS} src={singlePurple} alt="" />
+
+                    <img className='chips-bottom' src={purple} alt="" style={chipAdd.chipHundred === 0 ? { display: "none" } : null} onClick={() => [setPurple('smallActivePurple'), setTimeout(dispatch, 1000, chipHundredRemove()), setTimeout(setPurple, 1000, 'small')]} />
                   </div>
 
                 </div>

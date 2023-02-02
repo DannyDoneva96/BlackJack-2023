@@ -1,5 +1,6 @@
 - [X] Install dependancies - @Redux/Toolkit
 - [X] Create global state for chips in Redux
+TODO:must change the logic behind adding chips It will begin with all colors and an endless number of coins, with a set amount of initial currency that will decrease depending on the bet.
 - [X] Add reducres for adding chips
 - [X] Add reducer for removing chips during gameplay
 - [X] Add modal with chip options (initial cash)

@@ -131,22 +131,125 @@
   width: 120px;
 }
 
-.smallActive {
+.smallActiveBlue {
   display: block;
   position: absolute;
   width: 50px;
   transform: translate(21px, 23px);
-    animation: move 0.8s linear;
-    animation-fill-mode:none;
+  animation: move 0.9s linear;
+  animation-fill-mode: none;
 }
+
 @keyframes move {
   0% {
-    display:block;
+    display: block;
     transform: translate(21px, 23px);
   }
 
   100% {
     transform: translate(409px, -283px);
+
+  }
+}
+
+.smallActiveGrey {
+  display: block;
+  position: absolute;
+  width: 50px;
+  transform: translate(21px, 23px);
+  animation: moveGrey 0.9s linear;
+  animation-fill-mode: none;
+}
+
+@keyframes moveGrey {
+  0% {
+    display: block;
+    transform: translate(21px, 23px);
+  }
+
+  100% {
+    transform: translate(313px, -270px);
+
+  }
+}
+.smallActiveGreen {
+  display: block;
+  position: absolute;
+  width: 50px;
+  transform: translate(21px, 23px);
+  animation: moveGreen 0.9s linear;
+  animation-fill-mode: none;
+}
+
+@keyframes moveGreen {
+  0% {
+    display: block;
+    transform: translate(21px, 23px);
+  }
+
+  100% {
+    transform: translate(218px, -270px);
+
+  }
+}
+.smallActiveRed {
+  display: block;
+  position: absolute;
+  width: 50px;
+  transform: translate(21px, 23px);
+  animation: movePurple 0.9s linear;
+  animation-fill-mode: none;
+}
+
+@keyframes movePurple {
+  0% {
+    display: block;
+    transform: translate(21px, 23px);
+  }
+
+  100% {
+    transform: translate(123px, -270px);
+
+  }
+}
+
+.smallActivePurple {
+  display: block;
+  position: absolute;
+  width: 50px;
+  transform: translate(21px, 23px);
+  animation: moveRed 0.9s linear;
+  animation-fill-mode: none;
+}
+
+@keyframes moveRed {
+  0% {
+    display: block;
+    transform: translate(21px, 23px);
+  }
+
+  100% {
+    transform: translate(218px, -270px);
+
+  }
+}
+.smallActiveGreen {
+  display: block;
+  position: absolute;
+  width: 50px;
+  transform: translate(21px, 23px);
+  animation: moveGreen 0.9s linear;
+  animation-fill-mode: none;
+}
+
+@keyframes moveRed {
+  0% {
+    display: block;
+    transform: translate(21px, 23px);
+  }
+
+  100% {
+    transform: translate(28px, -270px);
 
   }
 }
@@ -157,17 +260,23 @@
   transform: translate(21px, 23px);
 }
 
-.smallChipsBets{
+.smallChipsBets {
   width: 50px;
 }
 
-.div-cont-bet{
+.div-cont-bet {
   width: 256px;
   height: 67px;
-position: relative;
+  position: relative;
 
 }
 
-.chip-bet-fl-c{
-  display:flex;
+.chip-bet-fl-c {
+  display: flex;
+}
+
+.total{
+  text-align: center;
+  font-size: 1rem;
+  
 }
