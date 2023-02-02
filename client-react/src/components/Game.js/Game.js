@@ -84,9 +84,8 @@ const Game = () => {
             </div>
             <div className='game-options'>
               <button>Hit</button>
-              {/* TODO: here must be an image of chip and on click to remove the last chip */}
               <div className='div-cont-bet'>
-
+                  <p className='total'>{chipAdd.total}$</p>
                 <BetChipView />
 
               </div>
