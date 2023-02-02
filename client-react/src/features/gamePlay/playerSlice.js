@@ -86,19 +86,19 @@ export const playerChipsSliceAdd = createSlice({
         LastOneRemove: (state) => {
 
             let last = state.bet.pop()
-            if (last === 5) {
-                state.total -= 5;
-                state.chipFive += 1;
-            } else if (last === 10) {
+            if (last === '/static/media/dark-blue-chip – Копие.3a0c00978220e1dbc78f.png') {
+                state.total -= 5
+                state.chipFive += 1
+            } else if (last === '/static/media/grey-chip – Копие.2fe1c62ee25b0ae3aca5.png') {
                 state.total -= 10;
                 state.chipTen += 1;
-            } else if (last === 20) {
+            } else if (last === '/static/media/green-chip – Копие.5f48fa5cdbf813467298.png') {
                 state.total -= 20;
                 state.chipTwenty += 1;
-            } else if (last === 50) {
+            } else if (last === '/static/media/red-chip-removebg-preview – Копие.0a4dc1cdeb837c02df3c.png') {
                 state.total -= 50;
                 state.chipFifty += 1;
-            } else if (last === 100) {
+            } else if (last === '/static/media/purple-chip – Копие.2e44bc7335959af17904.png') {
                 state.chipHundred += 1;
                 state.total -= 100;
             }
