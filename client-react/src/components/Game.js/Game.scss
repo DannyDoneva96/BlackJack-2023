@@ -92,7 +92,7 @@
 
 }
 
-.game-options button {
+.game-options button ,.btn-play-game{
   color: rgba(223, 190, 106, 0.7);
   margin-top: 1rem;
   width: 6rem;
@@ -104,9 +104,10 @@
   background: transparent;
   border: 1px solid rgba(223, 190, 106, 0.7);
   border-radius: 30px;
+  
 }
 
-.game-options button:hover {
+.game-options button:hover ,.btn-play-game:hover{
   color: #000;
   background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8));
   border: 1px solid black;
@@ -128,7 +129,7 @@
 }
 
 .card {
-  width: 120px;
+  width: 115px;
 }
 
 .smallActiveBlue {
