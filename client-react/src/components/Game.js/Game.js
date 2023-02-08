@@ -60,7 +60,7 @@ const Game = () => {
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
 
-  const getCard = (cardDeck) => {
+  const getDealerCards = (cardDeck) => {
     let random1 = Math.floor(Math.random() * cardDeck.length)
     let random2 = Math.floor(Math.random() * cardDeck.length)
     if (random1 !== random2 &&
@@ -70,11 +70,27 @@ const Game = () => {
       random2 <= cardDeck.length) {
 
       let cards = [cardDeck[random1], cardDeck[random2]]
-        setDealerCards(cards)
+      setDealerCards(cards)
       return cards
     }
 
   }
+  const getPlayerCards = (cardDeck) => {
+    let random1 = Math.floor(Math.random() * cardDeck.length)
+    let random2 = Math.floor(Math.random() * cardDeck.length)
+    if (random1 !== random2 &&
+      random1 !== -1 &&
+      random2 !== -1 &&
+      random1 <= cardDeck.length &&
+      random2 <= cardDeck.length) {
+
+      let cards = [cardDeck[random1], cardDeck[random2]]
+      setPlayerCards(cards)
+      return cards
+    }
+
+  }
+
   const getOneCard = (cardDeck) => {
     let Onecard = cardDeck[Math.floor(Math.random() * cardDeck.length)]
 
@@ -112,12 +128,18 @@ const Game = () => {
               </div>
             </div>
 
-            <Countdown className='countDown'
-              date={Date.now() + 15000}
-            >
-              <button onClick={() => [getCard(cardDeck), setToggleValue(state => !state)]} className='btn-play-game'>PLAY</button>
+            {chipAdd.total === 0
+              ? <Countdown className='countDown'
+                date={Date.now() + 15000}
+              >
+                {chipAdd.total === 0
+                  ? <p>You Must place a bet!</p>
+                  : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state)]} className='btn-play-game'>PLAY</button>
+                }
 
-            </Countdown>
+              </Countdown>
+              : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state)]} className='btn-play-game'>PLAY</button>}
+
 
             <div className='game-options'>
               <button>Hit</button>
