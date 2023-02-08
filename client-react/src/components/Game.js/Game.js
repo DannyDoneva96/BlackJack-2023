@@ -22,7 +22,6 @@ import {
   play,
 } from "../../features/gamePlay/playerSlice";
 
-import randomCard from "../../assets/cards/K/king of clubs.png"
 import cardsBackSide from '../../assets/images/back-removebg-preview.png'
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
@@ -93,6 +92,8 @@ const Game = () => {
 
   const getOneCard = (cardDeck) => {
     let Onecard = cardDeck[Math.floor(Math.random() * cardDeck.length)]
+    return Onecard
+    console.log(playerCards)
 
   }
 
@@ -142,7 +143,7 @@ const Game = () => {
 
 
             <div className='game-options'>
-              <button>Hit</button>
+              <button onClick={() => setPlayerCards((prevState)=>[...prevState,getOneCard(cardDeck)])} > Hit</button>
               <div className='div-cont-bet'>
 
                 <p className='total'>{chipAdd.total}$</p>
