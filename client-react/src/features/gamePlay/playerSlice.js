@@ -83,6 +83,10 @@ export const playerChipsSliceAdd = createSlice({
             state.total += 100;
 
         },
+        play: (state) => {
+
+
+        },
         LastOneRemove: (state) => {
 
             let last = state.bet.pop()
@@ -118,6 +122,7 @@ export const {
     chipFiftyRemove,
     chipHundredRemove,
     LastOneRemove,
+    play
 } = playerChipsSliceAdd.actions;
 
 export const playerChips = (state) => state.playerChipAdd;

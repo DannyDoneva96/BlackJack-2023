@@ -20,7 +20,7 @@ const BetChipView = () => {
              style={{position:'absolute',left:`${counter+=20}px`}} alt="" />
 
             )}
-
+              
         </div>
     )
 }
