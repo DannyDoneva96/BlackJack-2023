@@ -9,13 +9,20 @@
 
 .block:before,
 .block:after {
-  content: '';
+  content: "";
   position: absolute;
   left: -2px;
   top: -2px;
-  // background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+  // background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094,
   //   #0000ff, #00ff00,#ffff00, #ff0000);
-  background: linear-gradient(45deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8, ), rgba(146, 111, 52, 0.8), rgba(34, 34, 34, 0), rgba(34, 34, 34, 0));
+  background: linear-gradient(
+    45deg,
+    rgba(223, 190, 106, 0.8),
+    rgba(146, 111, 52, 0.8),
+    rgba(146, 111, 52, 0.8),
+    rgba(34, 34, 34, 0),
+    rgba(34, 34, 34, 0)
+  );
   background-size: 400%;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
@@ -54,7 +61,7 @@
 }
 
 .chips-bottom {
-  width: 100px
+  width: 100px;
 }
 
 .btn-main-menu {
@@ -68,7 +75,14 @@
   letter-spacing: 3px;
   color: rgba(223, 190, 106, 0.7);
   padding: 0.5rem 1rem;
-  background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8), rgba(34, 34, 34, 0), rgba(34, 34, 34, 0));
+  background: linear-gradient(
+    270deg,
+    rgba(223, 190, 106, 0.8),
+    rgba(146, 111, 52, 0.8),
+    rgba(146, 111, 52, 0.8),
+    rgba(34, 34, 34, 0),
+    rgba(34, 34, 34, 0)
+  );
   background-position: 1% 50%;
   background-size: 300% 300%;
   border: 1px solid rgba(223, 190, 106, 0.7);
@@ -89,10 +103,10 @@
   justify-content: center;
   width: 100%;
   flex-direction: row;
-
 }
 
-.game-options button ,.btn-play-game{
+.game-options button,
+.btn-play-game {
   color: rgba(223, 190, 106, 0.7);
   margin-top: 1rem;
   width: 6rem;
@@ -104,10 +118,10 @@
   background: transparent;
   border: 1px solid rgba(223, 190, 106, 0.7);
   border-radius: 30px;
-  
 }
 
-.game-options button:hover ,.btn-play-game:hover{
+.game-options button:hover,
+.btn-play-game:hover {
   color: #000;
   background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8));
   border: 1px solid black;
@@ -120,7 +134,6 @@
   color: black;
   border: 1px solid rgba(223, 190, 106, 0);
   background-position: 99% 50%;
-
 }
 
 .dealercardscontainer,
@@ -149,7 +162,6 @@
 
   100% {
     transform: translate(409px, -283px);
-
   }
 }
 
@@ -170,7 +182,6 @@
 
   100% {
     transform: translate(313px, -270px);
-
   }
 }
 .smallActiveGreen {
@@ -190,7 +201,6 @@
 
   100% {
     transform: translate(218px, -270px);
-
   }
 }
 .smallActiveRed {
@@ -210,7 +220,6 @@
 
   100% {
     transform: translate(123px, -270px);
-
   }
 }
 
@@ -231,7 +240,6 @@
 
   100% {
     transform: translate(218px, -270px);
-
   }
 }
 .smallActiveGreen {
@@ -251,7 +259,6 @@
 
   100% {
     transform: translate(28px, -270px);
-
   }
 }
 .small {
@@ -269,15 +276,13 @@
   width: 256px;
   height: 67px;
   position: relative;
-
 }
 
 .chip-bet-fl-c {
   display: flex;
 }
 
-.total{
+.total {
   text-align: center;
   font-size: 1rem;
-  
 }
