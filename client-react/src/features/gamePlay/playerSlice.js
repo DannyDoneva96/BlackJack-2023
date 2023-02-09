@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import cardsBackSide from '../../assets/images/back-removebg-preview.png'
 
 
 const initialState = {
@@ -10,6 +11,11 @@ const initialState = {
     hasChips: false,
     total: 0,
     bet: [],
+    dealerCards: [{ image: cardsBackSide }, { image: cardsBackSide }],
+    playerCards: [{ image: cardsBackSide }, { image: cardsBackSide }],
+    dealerCardsValue: 0,
+    playerCardsValue: 0,
+
 }
 
 export const playerChipsSliceAdd = createSlice({
@@ -83,10 +89,7 @@ export const playerChipsSliceAdd = createSlice({
             state.total += 100;
 
         },
-        play: (state) => {
 
-
-        },
         LastOneRemove: (state) => {
 
             let last = state.bet.pop()
@@ -107,7 +110,63 @@ export const playerChipsSliceAdd = createSlice({
                 state.total -= 100;
             }
         },
+        getOneCard: (state, cardDeck) => {
 
+            const onecard = cardDeck.payload[Math.floor(Math.random() * cardDeck.payload.length)];
+
+            state.playerCards.push(onecard);
+            state.playerCardsValue += onecard.value;
+
+        },
+
+        getOneDealerCard: (state, cardDeck) => {
+
+            const onecard = cardDeck.payload[Math.floor(Math.random() * cardDeck.payload.length)];
+
+            state.dealerCards.push(onecard);
+            state.dealerCardsValue += onecard.value;
+        },
+
+        getDealerCards: (state, cardDeck) => {
+
+            let random1 = Math.floor(Math.random() * cardDeck.payload.length);
+            let random2 = Math.floor(Math.random() * cardDeck.payload.length);
+
+            if (random1 !== random2 &&
+                random1 !== -1 &&
+                random2 !== -1 &&
+                random1 <= cardDeck.payload.length &&
+                random2 <= cardDeck.payload.length) {
+                let cards = [cardDeck.payload[random1], cardDeck.payload[random2]]
+                state.dealerCards = cards
+                let value = cards
+                    .reduce((acc, card) => {
+                        acc += card.value
+                        return acc
+                    }, 0);
+
+                state.dealerCardsValue = value;
+            }
+        },
+        getPlayerCards: (state, cardDeck) => {
+            let random1 = Math.floor(Math.random() * cardDeck.payload.length)
+            let random2 = Math.floor(Math.random() * cardDeck.payload.length)
+            if (random1 !== random2 &&
+                random1 !== -1 &&
+                random2 !== -1 &&
+                random1 <= cardDeck.payload.length &&
+                random2 <= cardDeck.payload.length) {
+                let cards = [cardDeck.payload[random1], cardDeck.payload[random2]]
+                state.playerCards = cards
+                let value = cards
+                    .reduce((acc, card) => {
+                        acc += card.value
+                        return acc
+                    }, 0);
+
+                state.playerCardsValue = value;
+            }
+        }
     }
 });
 
@@ -122,8 +181,11 @@ export const {
     chipFiftyRemove,
     chipHundredRemove,
     LastOneRemove,
-    play
+    getOneCard,
+    getOneDealerCard,
+    getDealerCards,
+    getPlayerCards,
 } = playerChipsSliceAdd.actions;
 
-export const playerChips = (state) => state.playerChipAdd;
+export const gameState = (state) => state.playerChipAdd;
 export default playerChipsSliceAdd.reducer;
