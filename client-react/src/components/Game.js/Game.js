@@ -19,7 +19,9 @@ import {
   chipHundredRemove,
   playerChips,
   LastOneRemove,
-  play,
+  getOneCard,
+  getDealerCards,
+  getPlayerCards,
 } from "../../features/gamePlay/playerSlice";
 
 import cardsBackSide from '../../assets/images/back-removebg-preview.png'
@@ -50,75 +52,80 @@ const Game = () => {
   const [greenS, setGreen] = useState('small');
   const [redS, setRed] = useState('small');
   const [purpleS, setPurple] = useState('small');
-  const [dealerCards, setDealerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
-  const [playerCards, setPlayerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
   const [whilePlaying, setwhilePlaying] = useState(false);
 
-  const [cardValues, setCardValues] = useState({
-    dealerCardsTotalValue: 0,
-    playerCardsTotalValue: 0
-  })
+
+  // const [dealerCards, setDealerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
+  // const [playerCards, setPlayerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
+  // const [cardValues, setCardValues] = useState({
+  //   dealerCardsTotalValue: 0,
+  //   playerCardsTotalValue: 0
+  // })
 
   const chipAdd = useSelector(playerChips);
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
 
-  const getDealerCards = (cardDeck) => {
-    let random1 = Math.floor(Math.random() * cardDeck.length)
-    let random2 = Math.floor(Math.random() * cardDeck.length)
-    if (random1 !== random2 &&
-      random1 !== -1 &&
-      random2 !== -1 &&
-      random1 <= cardDeck.length &&
-      random2 <= cardDeck.length) {
+  // const getDealerCards = (cardDeck) => {
+  //   let random1 = Math.floor(Math.random() * cardDeck.length)
+  //   let random2 = Math.floor(Math.random() * cardDeck.length)
+  //   if (random1 !== random2 &&
+  //     random1 !== -1 &&
+  //     random2 !== -1 &&
+  //     random1 <= cardDeck.length &&
+  //     random2 <= cardDeck.length) {
 
-      let cards = [cardDeck[random1], cardDeck[random2]]
-      setDealerCards(cards)
-      let value = [cardDeck[random1], cardDeck[random2]]
-        .reduce((acc, card) => {
-          acc += card.value
-          return acc
-        }, 0)
+  //     let cards = [cardDeck[random1], cardDeck[random2]]
+  //     setDealerCards(cards)
+  //     let value = [cardDeck[random1], cardDeck[random2]]
+  //       .reduce((acc, card) => {
+  //         acc += card.value
+  //         return acc
+  //       }, 0)
 
-      setCardValues(state => ({
-        ...state,
-        dealerCardsTotalValue: value
-      }))
+  //     setCardValues(state => ({
+  //       ...state,
+  //       dealerCardsTotalValue: value
+  //     }))
 
-      return (cards, value)
-    }
-  }
-  const getPlayerCards = (cardDeck) => {
-    let random1 = Math.floor(Math.random() * cardDeck.length)
-    let random2 = Math.floor(Math.random() * cardDeck.length)
-    if (random1 !== random2 &&
-      random1 !== -1 &&
-      random2 !== -1 &&
-      random1 <= cardDeck.length &&
-      random2 <= cardDeck.length) {
-      let cards = [cardDeck[random1], cardDeck[random2]]
-      setPlayerCards(cards)
-      let value = [cardDeck[random1], cardDeck[random2]]
-        .reduce((acc, card) => {
-          acc += card.value
-          return acc
-        }, 0)
+  //     return (cards, value)
+  //   }
+  // }
+  // const getPlayerCards = (cardDeck) => {
+  //   let random1 = Math.floor(Math.random() * cardDeck.length)
+  //   let random2 = Math.floor(Math.random() * cardDeck.length)
+  //   if (random1 !== random2 &&
+  //     random1 !== -1 &&
+  //     random2 !== -1 &&
+  //     random1 <= cardDeck.length &&
+  //     random2 <= cardDeck.length) {
+  //     let cards = [cardDeck[random1], cardDeck[random2]]
+  //     setPlayerCards(cards)
+  //     let value = [cardDeck[random1], cardDeck[random2]]
+  //       .reduce((acc, card) => {
+  //         acc += card.value
+  //         return acc
+  //       }, 0)
 
-      setCardValues(state => ({
-        ...state,
-        playerCardsTotalValue: value
-      }))
+  //     setCardValues(state => ({
+  //       ...state,
+  //       playerCardsTotalValue: value
+  //     }))
 
-      return (cards, value)
-    }
-  }
+  //     return (cards, value)
+  //   }
+  // }
+  //  const onStand=()=>{
+       
+  //           while  (cardValues.dealerCardsTotalValue<=17){
+  //           setDealerCards(prevState =>[ ...prevState, cardDeck[Math.floor(Math.random() * cardDeck.length)]]);
+  //           setCardValues(state => ({
+  //             ...state,
+  //             dealerCardsTotalValue: dealerCards.reduce((a,card)=>  {  a+=Number(card.value); return a},0)
+  //           }))
+  //         }
+  //  }
 
-  const getOneCard = (cardDeck) => {
-    let onecard = cardDeck[Math.floor(Math.random() * cardDeck.length)]
-    console.log(onecard)
-
-    return onecard
-  }
 
 
   return (
@@ -138,8 +145,8 @@ const Game = () => {
           <section className="game-field">
             <div className='dealers-cards' >
               <div className="dealercardscontainer">
-                <p>{cardValues.dealerCardsTotalValue}</p>
-                {dealerCards.map(cardObject => <img src={cardObject.image} className='card' alt='' />)}
+                <p>{chipAdd.dealerCardsValue}</p>
+                {chipAdd.dealerCards.map(cardObject => <img key={cardObject.name} src={cardObject.image} className='card' alt='' />)}
                 {/* <Card /> */}
               </div>
             </div>
@@ -149,21 +156,21 @@ const Game = () => {
               >
                 {chipAdd.total === 0
                   ? <p>You Must place a bet!</p>
-                  : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>
+                  : <button onClick={() => [getDealerCards(chipAdd,cardDeck), getPlayerCards(chipAdd,cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>
                 }
               </Countdown>
-              : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>}
+              : <button onClick={() => [getDealerCards(chipAdd,cardDeck), getPlayerCards(chipAdd,cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>}
             {whilePlaying
               ? <div className='game-options'>
-                <button onClick={() => [setPlayerCards(prevState => [...prevState, cardDeck[Math.floor(Math.random() * cardDeck.length)]]), setCardValues(state => ({
-                  ...state,
-                  playerCardsTotalValue: playerCards.reduce((a,card)=>  {  a+=card.value; return a},0)
-                }))]} > Hit</button>
+                <button
+                 onClick={() => getOneCard(chipAdd,cardDeck)} 
+                
+                > Hit</button>
                 <div className='div-cont-bet'>
                   <p className='total'>{chipAdd.total}$</p>
                   <BetChipView />
                 </div>
-                <button>Stand</button>
+                <button >Stand</button>
               </div>
               : <div className='game-options'>
                 <div className='div-cont-bet'>
@@ -172,8 +179,8 @@ const Game = () => {
                 </div>
               </div>}
             <div className='players-cards'>
-              {playerCards.map(cardObject => <img src={cardObject.image} className='card' alt='' />)}
-              <p>{cardValues.playerCardsTotalValue}</p>
+              {chipAdd.playerCards.map(cardObject => <img key={cardObject.name} src={cardObject.image} className='card' alt='' />)}
+              <p>{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
