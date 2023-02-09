@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { Suspense, lazy, useState, useEffect } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import Countdown from 'react-countdown';
 
 import './Game.scss'
 import Loading from "../Loading/Loading";
 import BetChipView from './BetChipView';
-import Card from './Card';
 
 import { getCardDeck } from '../../features/cardDeck/cardDeckSlice';
 
@@ -17,12 +16,15 @@ import {
   chipTwentyRemove,
   chipFiftyRemove,
   chipHundredRemove,
-  playerChips,
+  gameState,
   LastOneRemove,
-  play,
+  getOneCard,
+  getOneDealerCard,
+  getDealerCards,
+  getPlayerCards,
 } from "../../features/gamePlay/playerSlice";
 
-import cardsBackSide from '../../assets/images/back-removebg-preview.png'
+
 import darkBlue from '../../assets/chips/5.png'
 import grey from '../../assets/chips/10.png'
 import green from '../../assets/chips/20.png'
@@ -39,9 +41,7 @@ import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 const CardComponent = lazy(() => import("./Card.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
-
 const Game = () => {
-
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
@@ -50,74 +50,29 @@ const Game = () => {
   const [greenS, setGreen] = useState('small');
   const [redS, setRed] = useState('small');
   const [purpleS, setPurple] = useState('small');
-  const [dealerCards, setDealerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
-  const [playerCards, setPlayerCards] = useState([{ image: cardsBackSide }, { image: cardsBackSide }]);
   const [whilePlaying, setwhilePlaying] = useState(false);
+  const [isStanding, setIsStanding] = useState(false);
 
-  const [cardValues, setCardValues] = useState({
-    dealerCardsTotalValue: 0,
-    playerCardsTotalValue: 0
-  })
-
-  const chipAdd = useSelector(playerChips);
+  const chipAdd = useSelector(gameState);
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
 
-  const getDealerCards = (cardDeck) => {
-    let random1 = Math.floor(Math.random() * cardDeck.length)
-    let random2 = Math.floor(Math.random() * cardDeck.length)
-    if (random1 !== random2 &&
-      random1 !== -1 &&
-      random2 !== -1 &&
-      random1 <= cardDeck.length &&
-      random2 <= cardDeck.length) {
-
-      let cards = [cardDeck[random1], cardDeck[random2]]
-      setDealerCards(cards)
-      let value = [cardDeck[random1], cardDeck[random2]]
-        .reduce((acc, card) => {
-          acc += card.value
-          return acc
-        }, 0)
-
-      setCardValues(state => ({
-        ...state,
-        dealerCardsTotalValue: value
-      }))
-
-      return (cards, value)
+  // TO DO- MAKE THIS TO RETURN THE UPDATED STATE FROM THE dealerCardsValue - seems it returns the initial amount only!!!
+  const drawDealerCard = () => {
+    if (isStanding) {
+      dispatch(getOneDealerCard(cardDeck))
+      console.log(chipAdd.dealerCardsValue);
     }
-  }
-  const getPlayerCards = (cardDeck) => {
-    let random1 = Math.floor(Math.random() * cardDeck.length)
-    let random2 = Math.floor(Math.random() * cardDeck.length)
-    if (random1 !== random2 &&
-      random1 !== -1 &&
-      random2 !== -1 &&
-      random1 <= cardDeck.length &&
-      random2 <= cardDeck.length) {
-      let cards = [cardDeck[random1], cardDeck[random2]]
-      setPlayerCards(cards)
-      let value = [cardDeck[random1], cardDeck[random2]]
-        .reduce((acc, card) => {
-          acc += card.value
-          return acc
-        }, 0)
+    return (setInterval(() => {
 
-      setCardValues(state => ({
-        ...state,
-        playerCardsTotalValue: value
-      }))
+      console.log('✅ getting a card for dealer');
+      if (chipAdd.dealerCardsValue > 17) { return }
+      setIsStanding(state => true);
+      dispatch(getOneDealerCard(cardDeck));
 
-      return (cards, value)
-    }
-  }
-
-  const getOneCard = (cardDeck) => {
-    let onecard = cardDeck[Math.floor(Math.random() * cardDeck.length)]
-    console.log(onecard)
-
-    return onecard
+    }, 1500),
+      clearInterval()
+    );
   }
 
 
@@ -138,71 +93,171 @@ const Game = () => {
           <section className="game-field">
             <div className='dealers-cards' >
               <div className="dealercardscontainer">
-                <p>{cardValues.dealerCardsTotalValue}</p>
-                {dealerCards.map(cardObject => <img src={cardObject.image} className='card' alt='' />)}
-                {/* <Card /> */}
+                <p>{chipAdd.dealerCardsValue}</p>
+                {chipAdd.dealerCards.map
+                  (cardObject =>
+                    <img key={nanoid(15)}
+                      src={cardObject.image}
+                      className='card' alt=''
+                    />)}
               </div>
             </div>
+
             {chipAdd.total === 0
-              ? <Countdown className='countDown'
-                date={Date.now() + 15000}
-              >
-                {chipAdd.total === 0
-                  ? <p>You Must place a bet!</p>
-                  : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>
-                }
-              </Countdown>
-              : <button onClick={() => [getDealerCards(cardDeck), getPlayerCards(cardDeck), setToggleValue(state => !state), setwhilePlaying(true)]} className='btn-play-game'>DEAL</button>}
-            {whilePlaying
-              ? <div className='game-options'>
-                <button onClick={() => [setPlayerCards(prevState => [...prevState, cardDeck[Math.floor(Math.random() * cardDeck.length)]]), setCardValues(state => ({
-                  ...state,
-                  playerCardsTotalValue: playerCards.reduce((a,card)=>  {  a+=card.value; return a},0)
-                }))]} > Hit</button>
-                <div className='div-cont-bet'>
-                  <p className='total'>{chipAdd.total}$</p>
-                  <BetChipView />
+              ?
+              <>
+                <p>You Must place a bet!</p>
+                <Countdown className='countDown'
+                  date={Date.now() + 15000}
+                />
+              </>
+              :
+              whilePlaying
+                ?
+                null
+                :
+                <button
+                  onClick={() => [
+                    dispatch(getDealerCards(cardDeck)),
+                    dispatch(getPlayerCards(cardDeck)),
+                    setToggleValue(state => !state),
+                    setwhilePlaying(true)
+                  ]} className='btn-play-game'>
+                  DEAL
+                </button>
+            }
+            {
+              whilePlaying
+                ?
+                chipAdd.playerCardsValue === 21
+                  ?
+                  <p>You have reached 21 points!</p>
+                  :
+                  chipAdd.playerCardsValue > 21
+                    ?
+                    <div>
+                      <p>You lose! You have {chipAdd.playerCardsValue} points!</p>
+                      <p>Better luck next time!</p>
+                    </div>
+                    :
+                    // TODO: CLEAR THE RESULTS AND RESET THE GAME!
+                    <div className='game-options'>
+                      <button
+                        onClick={() => dispatch(getOneCard(cardDeck))}>
+                        Hit
+                      </button>
+                      <div className='div-cont-bet'>
+                        <p className='total'>{chipAdd.total}$</p>
+                        <BetChipView />
+                      </div>
+                      {/* TO DO BUTTON STAND LOGIC */}
+                      <button onClick={() => chipAdd.dealerCardsValue <= 17 ? [setIsStanding(state => true), drawDealerCard()] : null}>Stand</button>
+                    </div>
+                :
+                <div className='game-options'>
+                  <div className='div-cont-bet'>
+                    <p className='total'>{chipAdd.total}$</p>
+                    <BetChipView />
+                  </div>
                 </div>
-                <button>Stand</button>
-              </div>
-              : <div className='game-options'>
-                <div className='div-cont-bet'>
-                  <p className='total'>{chipAdd.total}$</p>
-                  <BetChipView />
-                </div>
-              </div>}
+            }
             <div className='players-cards'>
-              {playerCards.map(cardObject => <img src={cardObject.image} className='card' alt='' />)}
-              <p>{cardValues.playerCardsTotalValue}</p>
+              {chipAdd.playerCards.map(
+                cardObject =>
+                  <img key={nanoid(15)}
+                    src={cardObject.image}
+                    className='card'
+                    alt=''
+                  />)}
+              <p>{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
             toggleValue
               ?
-
               <footer className="chips-container">
                 <div className="chips">
                   <div>
-                    <img id='single-blue' className={blueS} src={singleFive} alt="" />
-                    <img className='chips-bottom' src={darkBlue} style={chipAdd.chipFive === 0 ? { display: "none" } : null} alt=""
-                      onClick={() => [setBlue('smallActiveBlue'), setTimeout(dispatch, 1000, chipFiveRemove()), setTimeout(setBlue, 1000, 'small')]}
+                    <img
+                      id='single-blue'
+                      className={blueS}
+                      src={singleFive}
+                      alt=""
+                    />
+                    <img
+                      className='chips-bottom'
+                      src={darkBlue}
+                      style={chipAdd.chipFive === 0 ? { display: "none" } : null}
+                      alt=""
+                      onClick={() => [
+                        setBlue('smallActiveBlue'),
+                        setTimeout(dispatch, 1000, chipFiveRemove()),
+                        setTimeout(setBlue, 1000, 'small')]}
                     />
                   </div>
                   <div>
                     <img id='single-blue' className={greyS} src={singleTen} alt="" />
-                    <img className='chips-bottom' src={grey} alt="" style={chipAdd.chipTen === 0 ? { display: "none" } : null} onClick={() => [setGrey('smallActiveGrey'), setTimeout(dispatch, 1000, chipTenRemove()), setTimeout(setGrey, 1000, 'small')]} />
+                    <img
+                      className='chips-bottom'
+                      src={grey} alt=""
+                      style={chipAdd.chipTen === 0 ? { display: "none" } : null}
+                      onClick={() => [
+                        setGrey('smallActiveGrey'),
+                        setTimeout(dispatch, 1000, chipTenRemove()),
+                        setTimeout(setGrey, 1000, 'small')]}
+                    />
                   </div>
                   <div>
-                    <img id='single-blue' className={greenS} src={singleGreen} alt="" />
-                    <img className='chips-bottom' src={green} alt="" style={chipAdd.chipTwenty === 0 ? { display: "none" } : null} onClick={() => [setGreen('smallActiveGreen'), setTimeout(dispatch, 1000, chipTwentyRemove()), setTimeout(setGreen, 1000, 'small')]} />
+                    <img
+                      id='single-blue'
+                      className={greenS}
+                      src={singleGreen}
+                      alt=""
+                    />
+                    <img
+                      className='chips-bottom'
+                      src={green}
+                      alt=""
+                      style={chipAdd.chipTwenty === 0 ? { display: "none" } : null}
+                      onClick={() => [
+                        setGreen('smallActiveGreen'),
+                        setTimeout(dispatch, 1000, chipTwentyRemove()),
+                        setTimeout(setGreen, 1000, 'small')]}
+                    />
                   </div>
                   <div>
-                    <img id='single-blue' className={redS} src={singleRed} alt="" />
-                    <img className='chips-bottom' src={red} alt="" style={chipAdd.chipFifty === 0 ? { display: "none" } : null} onClick={() => [setRed('smallActiveRed'), setTimeout(dispatch, 1000, chipFiftyRemove()), setTimeout(setRed, 1000, 'small')]} />
+                    <img
+                      id='single-blue'
+                      className={redS}
+                      src={singleRed}
+                      alt=""
+                    />
+                    <img
+                      className='chips-bottom'
+                      src={red} alt=""
+                      style={chipAdd.chipFifty === 0 ? { display: "none" } : null}
+                      onClick={() => [
+                        setRed('smallActiveRed'),
+                        setTimeout(dispatch, 1000, chipFiftyRemove()),
+                        setTimeout(setRed, 1000, 'small')]}
+                    />
                   </div>
                   <div>
-                    <img id='single-blue' className={purpleS} src={singlePurple} alt="" />
-                    <img className='chips-bottom' src={purple} alt="" style={chipAdd.chipHundred === 0 ? { display: "none" } : null} onClick={() => [setPurple('smallActivePurple'), setTimeout(dispatch, 1000, chipHundredRemove()), setTimeout(setPurple, 1000, 'small')]} />
+                    <img
+                      id='single-blue'
+                      className={purpleS}
+                      src={singlePurple}
+                      alt="" />
+                    <img
+                      className='chips-bottom'
+                      src={purple}
+                      alt=""
+                      style={chipAdd.chipHundred === 0 ? { display: "none" } : null}
+                      onClick={() => [
+                        setPurple('smallActivePurple'),
+                        setTimeout(dispatch, 1000, chipHundredRemove()),
+                        setTimeout(setPurple, 1000, 'small')]}
+                    />
                   </div>
                 </div>
               </footer>
