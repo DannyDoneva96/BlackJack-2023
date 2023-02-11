@@ -166,6 +166,12 @@ export const playerChipsSliceAdd = createSlice({
 
                 state.playerCardsValue = value;
             }
+        },
+        nextGame: (state) => {
+            state.bet = [];
+            state.total = 0;
+            state.dealerCards = [{ image: cardsBackSide }, { image: cardsBackSide }];
+            state.playerCards = [{ image: cardsBackSide }, { image: cardsBackSide }];
         }
     }
 });
@@ -185,6 +191,7 @@ export const {
     getOneDealerCard,
     getDealerCards,
     getPlayerCards,
+    nextGame
 } = playerChipsSliceAdd.actions;
 
 export const gameState = (state) => state.playerChipAdd;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { Suspense, lazy, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import Countdown from 'react-countdown';
 
 import './Game.scss'
@@ -17,11 +17,12 @@ import {
   chipFiftyRemove,
   chipHundredRemove,
   gameState,
-  LastOneRemove,
+  // LastOneRemove,
   getOneCard,
   getOneDealerCard,
   getDealerCards,
   getPlayerCards,
+  nextGame
 } from "../../features/gamePlay/playerSlice";
 
 
@@ -38,7 +39,7 @@ import singleGreen from '../../assets/chips/green-chip – Копие.png'
 import singleRed from '../../assets/chips/red-chip-removebg-preview – Копие.png'
 import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 
-const CardComponent = lazy(() => import("./Card.js"));
+// const CardComponent = lazy(() => import("./Card.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
 const Game = () => {
@@ -52,29 +53,54 @@ const Game = () => {
   const [purpleS, setPurple] = useState('small');
   const [whilePlaying, setwhilePlaying] = useState(false);
   const [isStanding, setIsStanding] = useState(false);
+  const [isOver, setIsOver] = useState(false);
+
+  const intervalId = useRef(null);
 
   const chipAdd = useSelector(gameState);
   const cardDeck = useSelector(getCardDeck);
   const dispatch = useDispatch();
+  // TO DO FOR THE WHOLE FILE!
+  // NEED TO FIX THE CONDITIONS FOR WINNING AND LOSING. AFTER THE DEALER GET THE CARDS IF "STAND" IS PRESSED, THE FINAL RESULT MUST BE DISPLAYED
 
-  // TO DO- MAKE THIS TO RETURN THE UPDATED STATE FROM THE dealerCardsValue - seems it returns the initial amount only!!!
-  const drawDealerCard = () => {
-    if (isStanding) {
-      dispatch(getOneDealerCard(cardDeck))
-      console.log(chipAdd.dealerCardsValue);
+  useEffect(() => {
+
+    if (isStanding && isOver) {
+      if (chipAdd.dealerCardsValue > 17) { return setIsOver(state => false) }
+      intervalId.current = setInterval(() => {
+        dispatch(getOneDealerCard(cardDeck));
+      }, 1000);
     }
-    return (setInterval(() => {
 
-      console.log('✅ getting a card for dealer');
-      if (chipAdd.dealerCardsValue > 17) { return }
-      setIsStanding(state => true);
-      dispatch(getOneDealerCard(cardDeck));
+    return () => {
+      clearInterval(intervalId.current);
+    }
 
-    }, 1500),
-      clearInterval()
-    );
+  }, [chipAdd.dealerCardsValue, isStanding]);
+
+
+
+  function startGame() {
+    dispatch(getDealerCards(cardDeck));
+    dispatch(getPlayerCards(cardDeck));
+    setIsOver(state => false);
+    setIsStanding(state => false);
+    setToggleValue(state => !state);
+    setwhilePlaying(state => true);
   }
 
+
+  function playAgain() {
+    setBlue(state => "small");
+    setGrey(state => "small");
+    setGreen(state => "small");
+    setRed(state => "small");
+    setPurple(state => "small");
+    startGame();
+    dispatch(nextGame());
+    setwhilePlaying(state => false);
+
+  }
 
   return (
     <div>
@@ -108,7 +134,7 @@ const Game = () => {
               <>
                 <p>You Must place a bet!</p>
                 <Countdown className='countDown'
-                  date={Date.now() + 15000}
+                  date={Date.now() + 13000}
                 />
               </>
               :
@@ -118,41 +144,64 @@ const Game = () => {
                 :
                 <button
                   onClick={() => [
-                    dispatch(getDealerCards(cardDeck)),
-                    dispatch(getPlayerCards(cardDeck)),
-                    setToggleValue(state => !state),
-                    setwhilePlaying(true)
+                    startGame()
                   ]} className='btn-play-game'>
                   DEAL
                 </button>
             }
             {
-              whilePlaying
+              whilePlaying //if playing the game
                 ?
-                chipAdd.playerCardsValue === 21
+                chipAdd.playerCardsValue === 21 // if the player has 21 points
                   ?
-                  <p>You have reached 21 points!</p>
+                  <>
+                    <p>You WIN! You have reached 21 points! </p> {/*the player wins*/}
+                  </>
                   :
-                  chipAdd.playerCardsValue > 21
+                  chipAdd.dealerCardsValue === 21 // if the dealer has 21 points, the player loses
                     ?
-                    <div>
-                      <p>You lose! You have {chipAdd.playerCardsValue} points!</p>
-                      <p>Better luck next time!</p>
-                    </div>
+                    <>
+                      <p>Dealer has 21 points, you lose!</p> {/*the player loses*/}
+                    </>
                     :
-                    // TODO: CLEAR THE RESULTS AND RESET THE GAME!
-                    <div className='game-options'>
-                      <button
-                        onClick={() => dispatch(getOneCard(cardDeck))}>
-                        Hit
-                      </button>
-                      <div className='div-cont-bet'>
-                        <p className='total'>{chipAdd.total}$</p>
-                        <BetChipView />
-                      </div>
-                      {/* TO DO BUTTON STAND LOGIC */}
-                      <button onClick={() => chipAdd.dealerCardsValue <= 17 ? [setIsStanding(state => true), drawDealerCard()] : null}>Stand</button>
-                    </div>
+                    chipAdd.dealerCardsValue > 21
+                      ?
+                      <>
+                        <p>Dealer has more than 21 points, YOU WIN!</p>
+                      </>
+                      :
+                      chipAdd.playerCardsValue > 21//if the player has more than 21 points
+                        ?
+                        <div>
+                          <p>You lose! You have {chipAdd.playerCardsValue} points!</p>
+                          <p>Better luck next time!</p>
+                        </div>
+                        :
+                        (!isOver && isStanding)
+                          ?
+                          <>
+                            <p>Dealer has {chipAdd.dealerCardsValue} points!</p>
+                            <p>You have {chipAdd.playerCardsValue} points!</p>
+                            <p>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
+                            <button onClick={() =>
+                              [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                          </>
+                          :
+                          // TODO: CLEAR THE RESULTS AND RESET THE GAME!
+                          <div className='game-options'>
+                            <button
+                              onClick={() => dispatch(getOneCard(cardDeck))}>
+                              Hit
+                            </button>
+                            <div className='div-cont-bet'>
+                              <p className='total'>{chipAdd.total}$</p>
+                              <BetChipView />
+                            </div>
+                            {/* TO DO BUTTON STAND LOGIC */}
+                            <button onClick={() => [chipAdd.dealerCardsValue <= 17 ? [setIsStanding(state => true), setIsOver(state => true)] : null]}>
+                              Stand
+                            </button>
+                          </div>
                 :
                 <div className='game-options'>
                   <div className='div-cont-bet'>
@@ -173,6 +222,15 @@ const Game = () => {
             </div>
           </section>
           {
+            (chipAdd.playerCardsValue >= 21 || chipAdd.dealerCardsValue >= 21)
+              ?
+              <>
+                <button onClick={() =>
+                  [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+              </>
+              : null
+          }
+          {
             toggleValue
               ?
               <footer className="chips-container">
@@ -191,8 +249,8 @@ const Game = () => {
                       alt=""
                       onClick={() => [
                         setBlue('smallActiveBlue'),
-                        setTimeout(dispatch, 1000, chipFiveRemove()),
-                        setTimeout(setBlue, 1000, 'small')]}
+                        setTimeout(() => { dispatch(chipFiveRemove()); }, 300),
+                        setTimeout(() => { setBlue("small") }, 300)]}
                     />
                   </div>
                   <div>
@@ -203,8 +261,8 @@ const Game = () => {
                       style={chipAdd.chipTen === 0 ? { display: "none" } : null}
                       onClick={() => [
                         setGrey('smallActiveGrey'),
-                        setTimeout(dispatch, 1000, chipTenRemove()),
-                        setTimeout(setGrey, 1000, 'small')]}
+                        setTimeout(() => { dispatch(chipTenRemove()) }, 300),
+                        setTimeout(() => { setGrey("small") }, 300)]}
                     />
                   </div>
                   <div>
@@ -221,8 +279,8 @@ const Game = () => {
                       style={chipAdd.chipTwenty === 0 ? { display: "none" } : null}
                       onClick={() => [
                         setGreen('smallActiveGreen'),
-                        setTimeout(dispatch, 1000, chipTwentyRemove()),
-                        setTimeout(setGreen, 1000, 'small')]}
+                        setTimeout(dispatch, 300, chipTwentyRemove()),
+                        setTimeout(() => { setGreen("small") }, 300)]}
                     />
                   </div>
                   <div>
@@ -238,8 +296,8 @@ const Game = () => {
                       style={chipAdd.chipFifty === 0 ? { display: "none" } : null}
                       onClick={() => [
                         setRed('smallActiveRed'),
-                        setTimeout(dispatch, 1000, chipFiftyRemove()),
-                        setTimeout(setRed, 1000, 'small')]}
+                        setTimeout(() => { dispatch(chipFiftyRemove()) }, 300),
+                        setTimeout(() => { setRed("small") }, 300)]}
                     />
                   </div>
                   <div>
@@ -255,8 +313,8 @@ const Game = () => {
                       style={chipAdd.chipHundred === 0 ? { display: "none" } : null}
                       onClick={() => [
                         setPurple('smallActivePurple'),
-                        setTimeout(dispatch, 1000, chipHundredRemove()),
-                        setTimeout(setPurple, 1000, 'small')]}
+                        setTimeout(dispatch, 300, chipHundredRemove()),
+                        setTimeout(() => { setPurple("small") }, 300)]}
                     />
                   </div>
                 </div>
