@@ -176,6 +176,8 @@ export const playerChipsSliceAdd = createSlice({
             }
         },
         nextGame: (state) => {
+            state.isBJDealer= false;
+            state.isBJPlayer = false;
             state.bet = [];
             state.total = 0;
             state.dealerCards = [{ image: cardsBackSide }, { image: cardsBackSide }];

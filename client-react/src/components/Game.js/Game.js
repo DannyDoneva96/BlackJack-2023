@@ -154,27 +154,31 @@ const Game = () => {
             {
               whilePlaying //if playing the game
                 ?
-                chipAdd.isBJPlayer === true  && chipAdd.isBJDealer === false// if the player has BJ 
+                (chipAdd.isBJPlayer === true && chipAdd.isBJDealer === false)// if the player has BJ 
                   ?
                   <>
                     <p>BlackJasck! </p> {/*the player wins*/}
                     <p>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
                     <button onClick={() =>
-                              [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
-                       
-                  </>
+                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+
+                    </>
+
                   :
-                  chipAdd.isBJDealer === true &&  chipAdd.isBJPlayer === false// if the dealer has BJ
+                  (chipAdd.isBJDealer === true && chipAdd.isBJPlayer === false)// if the dealer has BJ
                     ?
                     <>
                       <p>Dealer Wins!</p> {/*the player loses*/}
+                      <button onClick={() =>
+                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+
                     </>
                     :
                     chipAdd.dealerCardsValue > 21
                       ?
-                      <>
-                        <p>You win {chipAdd.total}$ !</p>
-                      </>
+
+                      <p>You win {chipAdd.total}$ !</p>
+
                       :
                       chipAdd.playerCardsValue > 21//if the player has more than 21 points
                         ?
@@ -182,31 +186,47 @@ const Game = () => {
                           <p>Dealer Wins!</p>
                         </div>
                         :
-                        (!isOver && isStanding)
+                        chipAdd.dealerCardsValue === chipAdd.playerCardsValue
                           ?
                           <>
-                            <p>Dealer has {chipAdd.dealerCardsValue} points!</p>
-                            <p>You have {chipAdd.playerCardsValue} points!</p>
-                            <p>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
-                            <button onClick={() =>
-                              [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                          <p>STAY!</p>
+                          <button onClick={() =>
+                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+
                           </>
                           :
-                          // TODO: CLEAR THE RESULTS AND RESET THE GAME!
-                          <div className='game-options'>
-                            <button
-                              onClick={() => dispatch(getOneCard(cardDeck))}>
-                              Hit
-                            </button>
-                            <div className='div-cont-bet'>
-                              <p className='total'>{chipAdd.total}$</p>
-                              <BetChipView />
-                            </div>
-                            {/* TO DO BUTTON STAND LOGIC */}
-                            <button onClick={() => [chipAdd.dealerCardsValue <= 17 ? [setIsStanding(state => true), setIsOver(state => true)] : null]}>
-                              Stand
-                            </button>
-                          </div>
+                          (chipAdd.dealerCardsValue >= 17 && chipAdd.dealerCardsValue < chipAdd.playerCardsValue)
+                            ?
+                            <>
+                              <p>You win {chipAdd.total}$ !</p>
+                              <button onClick={() =>
+                                [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                            </>
+                            :
+                            (!isOver && isStanding)
+                              ?
+                              <>
+
+                                <p>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
+                                <button onClick={() =>
+                                  [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                              </>
+                              :
+                              // TODO: CLEAR THE RESULTS AND RESET THE GAME!
+                              <div className='game-options'>
+                                <button
+                                  onClick={() => dispatch(getOneCard(cardDeck))}>
+                                  Hit
+                                </button>
+                                <div className='div-cont-bet'>
+                                  <p className='total'>{chipAdd.total}$</p>
+                                  <BetChipView />
+                                </div>
+                                {/* TO DO BUTTON STAND LOGIC */}
+                                <button onClick={() => [chipAdd.dealerCardsValue < 17 ? [setIsStanding(state => true), setIsOver(state => true)] : null]}>
+                                  Stand
+                                </button>
+                              </div>
                 :
                 <div className='game-options'>
                   <div className='div-cont-bet'>
