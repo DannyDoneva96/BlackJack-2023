@@ -22,10 +22,10 @@ export default function CashPopUp({ setisVisible }) {
         <img src={imgbj} alt="" />
         <h3 className="cp-h">Choose your initial cash:</h3>
         <div className="btn-cont-popup">
-          <button className="start-chips-btn" onClick={() => dispatch(chipFiveAdd(), setisVisible(state => false))}>Add 5 of each chips</button>
-          <button className="start-chips-btn" onClick={() => dispatch(chipTenAdd(), setisVisible(state => false))}>Add 10 of each chips</button>
-          <button className="start-chips-btn" onClick={() => dispatch(chipTwentyAdd(), setisVisible(state => false))}>Add 20 of each chips</button>
-          <button className="start-chips-btn" onClick={() => dispatch(chipFiftyAdd(), setisVisible(state => false))}>Add 50 of each chips</button>
+          <button className="start-chips-btn" onClick={() => dispatch(chipFiveAdd(), setisVisible(state => false))}>5,000</button>
+          <button className="start-chips-btn" onClick={() => dispatch(chipTenAdd(), setisVisible(state => false))}>10,000</button>
+          <button className="start-chips-btn" onClick={() => dispatch(chipTwentyAdd(), setisVisible(state => false))}>20,000</button>
+          <button className="start-chips-btn" onClick={() => dispatch(chipFiftyAdd(), setisVisible(state => false))}>50,000</button>
         </div>
       </div>
 

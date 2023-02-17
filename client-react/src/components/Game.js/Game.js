@@ -106,6 +106,7 @@ const Game = () => {
 
   return (
     <div>
+      <p className='sss'>{chipAdd.initialCash}</p>
       <div className="block">
         <button
           onClick={() => setToggleValue(state => !state)}
@@ -270,7 +271,7 @@ const Game = () => {
                     <img
                       className='chips-bottom'
                       src={darkBlue}
-                      style={chipAdd.chipFive === 0 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 5 ? { display: "none" } : null}
                       alt=""
                       onClick={() => [
                         setBlue('smallActiveBlue'),
@@ -283,7 +284,7 @@ const Game = () => {
                     <img
                       className='chips-bottom'
                       src={grey} alt=""
-                      style={chipAdd.chipTen === 0 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 10 ? { display: "none" } : null}
                       onClick={() => [
                         setGrey('smallActiveGrey'),
                         setTimeout(() => { dispatch(chipTenRemove()) }, 300),
@@ -301,7 +302,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={green}
                       alt=""
-                      style={chipAdd.chipTwenty === 0 ? { display: "none" } : null}
+                      style={chipAdd.initialCash <20 ? { display: "none" } : null}
                       onClick={() => [
                         setGreen('smallActiveGreen'),
                         setTimeout(dispatch, 300, chipTwentyRemove()),
@@ -318,7 +319,7 @@ const Game = () => {
                     <img
                       className='chips-bottom'
                       src={red} alt=""
-                      style={chipAdd.chipFifty === 0 ? { display: "none" } : null}
+                      style={chipAdd.initialCash <50 ? { display: "none" } : null}
                       onClick={() => [
                         setRed('smallActiveRed'),
                         setTimeout(() => { dispatch(chipFiftyRemove()) }, 300),
@@ -335,7 +336,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={purple}
                       alt=""
-                      style={chipAdd.chipHundred === 0 ? { display: "none" } : null}
+                      style={chipAdd.initialCash <100 ? { display: "none" } : null}
                       onClick={() => [
                         setPurple('smallActivePurple'),
                         setTimeout(dispatch, 300, chipHundredRemove()),
