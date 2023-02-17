@@ -15,6 +15,8 @@ const initialState = {
     playerCards: [{ image: cardsBackSide }, { image: cardsBackSide }],
     dealerCardsValue: 0,
     playerCardsValue: 0,
+    isBJDealer: false,
+    isBJDealer:false,
 
 }
 
@@ -131,7 +133,7 @@ export const playerChipsSliceAdd = createSlice({
 
             let random1 = Math.floor(Math.random() * cardDeck.payload.length);
             let random2 = Math.floor(Math.random() * cardDeck.payload.length);
-
+            
             if (random1 !== random2 &&
                 random1 !== -1 &&
                 random2 !== -1 &&
@@ -139,6 +141,9 @@ export const playerChipsSliceAdd = createSlice({
                 random2 <= cardDeck.payload.length) {
                 let cards = [cardDeck.payload[random1], cardDeck.payload[random2]]
                 state.dealerCards = cards
+                if ((cards[0].value === 1 && cards[1].value === 10) ||(cards[0].value === 10 && cards[1].value === 1) ){
+                    state.isBJDealer = true
+                }
                 let value = cards
                     .reduce((acc, card) => {
                         acc += card.value
@@ -158,6 +163,9 @@ export const playerChipsSliceAdd = createSlice({
                 random2 <= cardDeck.payload.length) {
                 let cards = [cardDeck.payload[random1], cardDeck.payload[random2]]
                 state.playerCards = cards
+                if ((cards[0].value === 1 && cards[1].value === 10) ||(cards[0].value === 10 && cards[1].value === 1) ){
+                    state.isBJPlayer = true
+                }
                 let value = cards
                     .reduce((acc, card) => {
                         acc += card.value
@@ -168,6 +176,8 @@ export const playerChipsSliceAdd = createSlice({
             }
         },
         nextGame: (state) => {
+            state.isBJDealer= false;
+            state.isBJPlayer = false;
             state.bet = [];
             state.total = 0;
             state.dealerCards = [{ image: cardsBackSide }, { image: cardsBackSide }];
@@ -191,7 +201,9 @@ export const {
     getOneDealerCard,
     getDealerCards,
     getPlayerCards,
-    nextGame
+    nextGame,
+    isBJDealer,
+    isBJPlayer,
 } = playerChipsSliceAdd.actions;
 
 export const gameState = (state) => state.playerChipAdd;
