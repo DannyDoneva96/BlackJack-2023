@@ -287,3 +287,18 @@ color: #f9f6f6;}
   text-align: center;
   font-size: 1rem;
 }
+.dealers-cards{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.abs{margin-left: 1rem;}
+.dealercardscontainer, .players-cards {
+  display: flex;
+  align-items: center;
+}
+.counter-cards {
+   font-weight: bolder;
+   color: rgba(223, 190, 106, 0.7); 
+   font-size: 3rem;
+}

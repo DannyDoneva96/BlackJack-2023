@@ -45,7 +45,7 @@ import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
 const Game = () => {
-  
+
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
@@ -104,11 +104,11 @@ const Game = () => {
     setwhilePlaying(state => false);
 
   }
-   
+
   return (
     <div>
       <div className="block">
-       
+
 
         <Suspense fallback={<Loading />}>
           {isVisible && !chipAdd.hasChips
@@ -119,7 +119,6 @@ const Game = () => {
           <section className="game-field">
             <div className='dealers-cards' >
               <div className="dealercardscontainer">
-                <p>{chipAdd.dealerCardsValue}</p>
                 {chipAdd.dealerCards.map
                   (cardObject =>
                     <img key={nanoid(15)}
@@ -127,6 +126,8 @@ const Game = () => {
                       className='card' alt=''
                     />)}
               </div>
+              <p className='counter-cards'>{chipAdd.dealerCardsValue}</p>
+
             </div>
 
             {chipAdd.total === 0
@@ -158,9 +159,9 @@ const Game = () => {
                     <p>BlackJasck! </p> {/*the player wins*/}
                     <p>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
                     <button onClick={() =>
-                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                      [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
-                    </>
+                  </>
 
                   :
                   (chipAdd.isBJDealer === true && chipAdd.isBJPlayer === false)// if the dealer has BJ
@@ -187,9 +188,9 @@ const Game = () => {
                         chipAdd.dealerCardsValue === chipAdd.playerCardsValue
                           ?
                           <>
-                          <p>STAY!</p>
-                          <button onClick={() =>
-                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                            <p>STAY!</p>
+                            <button onClick={() =>
+                              [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                           </>
                           :
@@ -233,6 +234,7 @@ const Game = () => {
                   </div>
                 </div>
             }
+
             <div className='players-cards'>
               {chipAdd.playerCards.map(
                 cardObject =>
@@ -241,7 +243,7 @@ const Game = () => {
                     className='card'
                     alt=''
                   />)}
-              <p>{chipAdd.playerCardsValue}</p>
+              <p className='counter-cards abs'>{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
@@ -299,7 +301,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={green}
                       alt=""
-                      style={chipAdd.initialCash <20 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 20 ? { display: "none" } : null}
                       onClick={() => [
                         setGreen('smallActiveGreen'),
                         setTimeout(dispatch, 300, chipTwentyRemove()),
@@ -316,7 +318,7 @@ const Game = () => {
                     <img
                       className='chips-bottom'
                       src={red} alt=""
-                      style={chipAdd.initialCash <50 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 50 ? { display: "none" } : null}
                       onClick={() => [
                         setRed('smallActiveRed'),
                         setTimeout(() => { dispatch(chipFiftyRemove()) }, 300),
@@ -333,7 +335,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={purple}
                       alt=""
-                      style={chipAdd.initialCash <100 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 100 ? { display: "none" } : null}
                       onClick={() => [
                         setPurple('smallActivePurple'),
                         setTimeout(dispatch, 300, chipHundredRemove()),
