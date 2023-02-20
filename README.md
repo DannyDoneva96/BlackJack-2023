@@ -1,5 +1,15 @@
-# Work in progress 23.01.23 - present
 
+# Work in progress 23.01.23 - present
+## Built with:
+
+### Frontend:
+
+- React.js
+- Redux
+- HTML
+- CSS
+- SCSS
+- React-countdown
 
 # BlackJack-2023
 It is the most widely played casino banking game in the world.
