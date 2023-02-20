@@ -156,9 +156,9 @@ const Game = () => {
                 (chipAdd.isBJPlayer === true && chipAdd.isBJDealer === false)// if the player has BJ 
                   ?
                   <>
-                    <p>BlackJasck! </p> {/*the player wins*/}
-                    <p>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
-                    <button onClick={() =>
+                    <p className='win-mes'>BlackJasck! </p> {/*the player wins*/}
+                    <p className='win-mes'>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
+                    <button className='.btn-pa' onClick={() =>
                       [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                   </>
@@ -167,8 +167,8 @@ const Game = () => {
                   (chipAdd.isBJDealer === true && chipAdd.isBJPlayer === false)// if the dealer has BJ
                     ?
                     <>
-                      <p>Dealer Wins!</p> {/*the player loses*/}
-                      <button onClick={() =>
+                      <p className='win-mes'>Dealer Wins!</p> {/*the player loses*/}
+                      <button className='btn-pa' onClick={() =>
                         [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                     </>
@@ -176,20 +176,20 @@ const Game = () => {
                     chipAdd.dealerCardsValue > 21
                       ?
 
-                      <p>You win {chipAdd.total}$ !</p>
+                      <p className='win-mes' >You win {chipAdd.total}$ !</p>
 
                       :
                       chipAdd.playerCardsValue > 21//if the player has more than 21 points
                         ?
                         <div>
-                          <p>Dealer Wins!</p>
+                          <p className='win-mes' >Dealer Wins!</p>
                         </div>
                         :
                         chipAdd.dealerCardsValue === chipAdd.playerCardsValue
                           ?
                           <>
-                            <p>STAY!</p>
-                            <button onClick={() =>
+                            <p className='win-mes' >STAY!</p>
+                            <button className='btn-pa' onClick={() =>
                               [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                           </>
@@ -197,8 +197,8 @@ const Game = () => {
                           (chipAdd.dealerCardsValue >= 17 && chipAdd.dealerCardsValue < chipAdd.playerCardsValue)
                             ?
                             <>
-                              <p>You win {chipAdd.total}$ !</p>
-                              <button onClick={() =>
+                              <p className='win-mes'>You win {chipAdd.total}$ !</p>
+                              <button className='btn-pa' onClick={() =>
                                 [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
                             </>
                             :
@@ -206,8 +206,8 @@ const Game = () => {
                               ?
                               <>
 
-                                <p>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
-                                <button onClick={() =>
+                                <p className='win-mes'>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
+                                <button className='btn-pa'  onClick={() =>
                                   [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
                               </>
                               :
@@ -250,7 +250,7 @@ const Game = () => {
             (chipAdd.playerCardsValue >= 21 || chipAdd.dealerCardsValue >= 21)
               ?
               <>
-                <button onClick={() =>
+                <button className='btn-pa' onClick={() =>
                   [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
               </>
               : null

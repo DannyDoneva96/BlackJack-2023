@@ -17,6 +17,8 @@ blockquote,
 dl,
 dd {
     margin: 0;
+    color: rgba(223, 190, 106, 0.7);
+
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -74,7 +76,9 @@ select {
     }
 }
 html{
-    background-image:url("./assets/images/background-.png")
+    background-image:url("./assets/images/background-.png");
+       color: rgba(223, 190, 106, 0.7);
+
 
 }
 a{    text-decoration: none;}

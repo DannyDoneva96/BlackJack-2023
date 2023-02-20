@@ -15,14 +15,12 @@
   top: -2px;
   // background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094,
   //   #0000ff, #00ff00,#ffff00, #ff0000);
-  background: linear-gradient(
-    45deg,
-    rgba(223, 190, 106, 0.8),
-    rgba(146, 111, 52, 0.8),
-    rgba(146, 111, 52, 0.8),
-    rgba(34, 34, 34, 0),
-    rgba(34, 34, 34, 0)
-  );
+  background: linear-gradient(45deg,
+      rgba(223, 190, 106, 0.8),
+      rgba(146, 111, 52, 0.8),
+      rgba(146, 111, 52, 0.8),
+      rgba(34, 34, 34, 0),
+      rgba(34, 34, 34, 0));
   background-size: 400%;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
@@ -75,14 +73,12 @@
   letter-spacing: 3px;
   color: rgba(223, 190, 106, 0.7);
   padding: 0.5rem 1rem;
-  background: linear-gradient(
-    270deg,
-    rgba(223, 190, 106, 0.8),
-    rgba(146, 111, 52, 0.8),
-    rgba(146, 111, 52, 0.8),
-    rgba(34, 34, 34, 0),
-    rgba(34, 34, 34, 0)
-  );
+  background: linear-gradient(270deg,
+      rgba(223, 190, 106, 0.8),
+      rgba(146, 111, 52, 0.8),
+      rgba(146, 111, 52, 0.8),
+      rgba(34, 34, 34, 0),
+      rgba(34, 34, 34, 0));
   background-position: 1% 50%;
   background-size: 300% 300%;
   border: 1px solid rgba(223, 190, 106, 0.7);
@@ -105,8 +101,11 @@
   flex-direction: row;
 }
 
+
+
 .game-options button,
-.btn-play-game {
+.btn-play-game,
+.btn-pa {
   color: rgba(223, 190, 106, 0.7);
   margin-top: 1rem;
   width: 6rem;
@@ -121,7 +120,8 @@
 }
 
 .game-options button:hover,
-.btn-play-game:hover {
+.btn-play-game:hover,
+.btn-pa:hover {
   color: #000;
   background: linear-gradient(270deg, rgba(223, 190, 106, 0.8), rgba(146, 111, 52, 0.8), rgba(146, 111, 52, 0.8));
   border: 1px solid black;
@@ -144,8 +144,12 @@
 .card {
   width: 115px;
 }
-.sss{font-size:3rem;
-color: #f9f6f6;}
+
+.sss {
+  font-size: 3rem;
+  color: #f9f6f6;
+}
+
 .smallActiveBlue {
   display: block;
   position: absolute;
@@ -185,6 +189,7 @@ color: #f9f6f6;}
     transform: translate(313px, -270px);
   }
 }
+
 .smallActiveGreen {
   display: block;
   position: absolute;
@@ -204,6 +209,7 @@ color: #f9f6f6;}
     transform: translate(218px, -270px);
   }
 }
+
 .smallActiveRed {
   display: block;
   position: absolute;
@@ -243,6 +249,7 @@ color: #f9f6f6;}
     transform: translate(218px, -270px);
   }
 }
+
 .smallActiveGreen {
   display: block;
   position: absolute;
@@ -262,6 +269,7 @@ color: #f9f6f6;}
     transform: translate(28px, -270px);
   }
 }
+
 .small {
   display: none;
   position: absolute;
@@ -287,18 +295,39 @@ color: #f9f6f6;}
   text-align: center;
   font-size: 1rem;
 }
-.dealers-cards{
+
+.dealers-cards {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.abs{margin-left: 1rem;}
-.dealercardscontainer, .players-cards {
+
+.abs {
+  margin-left: 1rem;
+}
+
+.dealercardscontainer,
+.players-cards {
   display: flex;
   align-items: center;
 }
+
 .counter-cards {
-   font-weight: bolder;
-   color: rgba(223, 190, 106, 0.7); 
-   font-size: 3rem;
+  font-weight: bolder;
+  color: rgba(223, 190, 106, 0.7);
+  font-size: 3rem;
+}
+.btn-pa {
+  margin: auto;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.win-mes{
+  font-size: 3rem;
+
+  color: rgba(223, 190, 106, 0.7);
+}
+.total{
+  font-size: 1.5rem
 }
