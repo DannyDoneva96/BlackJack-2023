@@ -45,7 +45,7 @@ import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
 const Game = () => {
-  
+
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
@@ -104,11 +104,11 @@ const Game = () => {
     setwhilePlaying(state => false);
 
   }
-   
+
   return (
     <div>
       <div className="block">
-       
+
 
         <Suspense fallback={<Loading />}>
           {isVisible && !chipAdd.hasChips
@@ -119,7 +119,6 @@ const Game = () => {
           <section className="game-field">
             <div className='dealers-cards' >
               <div className="dealercardscontainer">
-                <p>{chipAdd.dealerCardsValue}</p>
                 {chipAdd.dealerCards.map
                   (cardObject =>
                     <img key={nanoid(15)}
@@ -127,6 +126,8 @@ const Game = () => {
                       className='card' alt=''
                     />)}
               </div>
+              <p className='counter-cards'>{chipAdd.dealerCardsValue}</p>
+
             </div>
 
             {chipAdd.total === 0
@@ -155,19 +156,19 @@ const Game = () => {
                 (chipAdd.isBJPlayer === true && chipAdd.isBJDealer === false)// if the player has BJ 
                   ?
                   <>
-                    <p>BlackJasck! </p> {/*the player wins*/}
-                    <p>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
-                    <button onClick={() =>
-                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                    <p className='win-mes'>BlackJasck! </p> {/*the player wins*/}
+                    <p className='win-mes'>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
+                    <button className='.btn-pa' onClick={() =>
+                      [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
-                    </>
+                  </>
 
                   :
                   (chipAdd.isBJDealer === true && chipAdd.isBJPlayer === false)// if the dealer has BJ
                     ?
                     <>
-                      <p>Dealer Wins!</p> {/*the player loses*/}
-                      <button onClick={() =>
+                      <p className='win-mes'>Dealer Wins!</p> {/*the player loses*/}
+                      <button className='btn-pa' onClick={() =>
                         [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                     </>
@@ -175,29 +176,29 @@ const Game = () => {
                     chipAdd.dealerCardsValue > 21
                       ?
 
-                      <p>You win {chipAdd.total}$ !</p>
+                      <p className='win-mes' >You win {chipAdd.total}$ !</p>
 
                       :
                       chipAdd.playerCardsValue > 21//if the player has more than 21 points
                         ?
                         <div>
-                          <p>Dealer Wins!</p>
+                          <p className='win-mes' >Dealer Wins!</p>
                         </div>
                         :
                         chipAdd.dealerCardsValue === chipAdd.playerCardsValue
                           ?
                           <>
-                          <p>STAY!</p>
-                          <button onClick={() =>
-                        [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
+                            <p className='win-mes' >STAY!</p>
+                            <button className='btn-pa' onClick={() =>
+                              [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                           </>
                           :
                           (chipAdd.dealerCardsValue >= 17 && chipAdd.dealerCardsValue < chipAdd.playerCardsValue)
                             ?
                             <>
-                              <p>You win {chipAdd.total}$ !</p>
-                              <button onClick={() =>
+                              <p className='win-mes'>You win {chipAdd.total}$ !</p>
+                              <button className='btn-pa' onClick={() =>
                                 [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
                             </>
                             :
@@ -205,8 +206,8 @@ const Game = () => {
                               ?
                               <>
 
-                                <p>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
-                                <button onClick={() =>
+                                <p className='win-mes'>{chipAdd.dealerCardsValue > chipAdd.playerCardsValue ? "Dealer wins!" : "You win!"}</p>
+                                <button className='btn-pa'  onClick={() =>
                                   [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
                               </>
                               :
@@ -233,6 +234,7 @@ const Game = () => {
                   </div>
                 </div>
             }
+
             <div className='players-cards'>
               {chipAdd.playerCards.map(
                 cardObject =>
@@ -241,14 +243,14 @@ const Game = () => {
                     className='card'
                     alt=''
                   />)}
-              <p>{chipAdd.playerCardsValue}</p>
+              <p className='counter-cards abs'>{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
             (chipAdd.playerCardsValue >= 21 || chipAdd.dealerCardsValue >= 21)
               ?
               <>
-                <button onClick={() =>
+                <button className='btn-pa' onClick={() =>
                   [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
               </>
               : null
@@ -299,7 +301,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={green}
                       alt=""
-                      style={chipAdd.initialCash <20 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 20 ? { display: "none" } : null}
                       onClick={() => [
                         setGreen('smallActiveGreen'),
                         setTimeout(dispatch, 300, chipTwentyRemove()),
@@ -316,7 +318,7 @@ const Game = () => {
                     <img
                       className='chips-bottom'
                       src={red} alt=""
-                      style={chipAdd.initialCash <50 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 50 ? { display: "none" } : null}
                       onClick={() => [
                         setRed('smallActiveRed'),
                         setTimeout(() => { dispatch(chipFiftyRemove()) }, 300),
@@ -333,7 +335,7 @@ const Game = () => {
                       className='chips-bottom'
                       src={purple}
                       alt=""
-                      style={chipAdd.initialCash <100 ? { display: "none" } : null}
+                      style={chipAdd.initialCash < 100 ? { display: "none" } : null}
                       onClick={() => [
                         setPurple('smallActivePurple'),
                         setTimeout(dispatch, 300, chipHundredRemove()),
