@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cardsBackSide from '../../assets/images/back-removebg-preview.png'
+import audioChipAtStart from '../../assets/sounds/chipAtStart.mp3'
 
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
     playerCards: [{ image: cardsBackSide }, { image: cardsBackSide }],
     dealerCardsValue: 0,
     playerCardsValue: 0,
-    isBJDealer: false,
+    isBJPlayer: false,
     isBJDealer:false,
 
 }
@@ -22,20 +23,20 @@ export const playerChipsSliceAdd = createSlice({
     initialState,
     reducers: {
         chipFiveAdd: (state) => {
-           state.initialCash = 5000
+           state.initialCash = 500
             state.hasChips = true;
         },
         chipTenAdd: (state) => {
-            state.initialCash = 10000
+            state.initialCash = 1000
             state.hasChips = true;
         },
         chipTwentyAdd: (state) => {
-            state.initialCash = 20000
+            state.initialCash = 2000
 
             state.hasChips = true;
         },
         chipFiftyAdd: (state) => {
-            state.initialCash = 50000
+            state.initialCash = 5000
 
             state.hasChips = true;
         },
@@ -68,6 +69,11 @@ export const playerChipsSliceAdd = createSlice({
             state.initialCash -= 100;
             state.total += 100;
 
+        },
+        playAudio: (state)=>{
+                new Audio(audioChipAtStart).play();
+                
+             
         },
 
         LastOneRemove: (state) => {
@@ -182,6 +188,7 @@ export const {
     nextGame,
     isBJDealer,
     isBJPlayer,
+    playAudio
 } = playerChipsSliceAdd.actions;
 
 export const gameState = (state) => state.playerChipAdd;

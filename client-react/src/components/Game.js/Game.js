@@ -40,10 +40,12 @@ import singleGreen from '../../assets/chips/green-chip – Копие.png'
 import singleRed from '../../assets/chips/red-chip-removebg-preview – Копие.png'
 import singlePurple from '../../assets/chips/purple-chip – Копие.png'
 
+
 // const CardComponent = lazy(() => import("./Card.js"));
 const CashPopUp = lazy(() => import("../ChashPopUp/CashPopUp.js"));
 
 const Game = () => {
+  
 
   const [toggleValue, setToggleValue] = useState(true);
   const [isVisible, setisVisible] = useState(true);
@@ -55,7 +57,7 @@ const Game = () => {
   const [whilePlaying, setwhilePlaying] = useState(false);
   const [isStanding, setIsStanding] = useState(false);
   const [isOver, setIsOver] = useState(false);
-
+  const [isWin, setIsWin] = useState(false);
   const intervalId = useRef(null);
 
   const chipAdd = useSelector(gameState);
@@ -102,16 +104,12 @@ const Game = () => {
     setwhilePlaying(state => false);
 
   }
-
+   
   return (
     <div>
-      <p className='sss'>{chipAdd.initialCash}</p>
       <div className="block">
-        <button
-          onClick={() => setToggleValue(state => !state)}
-          className="btn-secondary">
-          Show Bets
-        </button>
+       
+
         <Suspense fallback={<Loading />}>
           {isVisible && !chipAdd.hasChips
             ?
