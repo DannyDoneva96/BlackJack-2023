@@ -17,14 +17,13 @@ import {
   chipFiftyRemove,
   chipHundredRemove,
   gameState,
-  // LastOneRemove,
   getOneCard,
   getOneDealerCard,
   getDealerCards,
   getPlayerCards,
   nextGame,
   isBJPlayer,
-  isBJDealer
+  isBJDealer,
 } from "../../features/gamePlay/playerSlice";
 
 
