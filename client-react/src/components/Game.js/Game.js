@@ -94,6 +94,7 @@ const Game = () => {
 
 
   function playAgain() {
+    
     setBlue(state => "small");
     setGrey(state => "small");
     setGreen(state => "small");
@@ -108,7 +109,7 @@ const Game = () => {
   return (
     <div>
       <div className="block">
-
+          <p style={{color: "white"}}>{chipAdd.initialCash}</p>
 
         <Suspense fallback={<Loading />}>
           {isVisible && !chipAdd.hasChips
