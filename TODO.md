@@ -40,6 +40,6 @@ TODO:must change the logic behind adding chips It will begin with all colors and
 6. Bugs To Be Fixed 
 [X] Player cant Stand if dealer is between 17-21 and player is less
 [] implement logic to calculate ACE (one or eleven) 
-[] counters of the Cards values  between games are not 0-s
+[X] counters of the Cards values  between games are not 0-s
 [X] Dealer continues to hit after  17
 [] After WIN add chipAdd.total*2 to initial Cash

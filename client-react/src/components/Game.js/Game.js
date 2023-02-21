@@ -126,7 +126,7 @@ const Game = () => {
                       className='card' alt=''
                     />)}
               </div>
-              <p className='counter-cards'>{chipAdd.dealerCardsValue}</p>
+              <p className={whilePlaying?'counter-cards' : 'hide'}>{chipAdd.dealerCardsValue}</p>
 
             </div>
 
@@ -244,7 +244,7 @@ const Game = () => {
                     className='card'
                     alt=''
                   />)}
-              <p className='counter-cards abs'>{chipAdd.playerCardsValue}</p>
+              <p className={whilePlaying?'counter-cards abs' : 'hide'} >{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
