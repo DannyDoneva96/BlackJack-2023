@@ -94,6 +94,7 @@ const Game = () => {
 
 
   function playAgain() {
+    
     setBlue(state => "small");
     setGrey(state => "small");
     setGreen(state => "small");
@@ -108,7 +109,7 @@ const Game = () => {
   return (
     <div>
       <div className="block">
-
+          <p style={{color: "white"}}>{chipAdd.initialCash}</p>
 
         <Suspense fallback={<Loading />}>
           {isVisible && !chipAdd.hasChips
@@ -126,7 +127,7 @@ const Game = () => {
                       className='card' alt=''
                     />)}
               </div>
-              <p className='counter-cards'>{chipAdd.dealerCardsValue}</p>
+              <p className={whilePlaying?'counter-cards' : 'hide'}>{chipAdd.dealerCardsValue}</p>
 
             </div>
 
@@ -244,7 +245,7 @@ const Game = () => {
                     className='card'
                     alt=''
                   />)}
-              <p className='counter-cards abs'>{chipAdd.playerCardsValue}</p>
+              <p className={whilePlaying?'counter-cards abs' : 'hide'} >{chipAdd.playerCardsValue}</p>
             </div>
           </section>
           {
