@@ -69,7 +69,7 @@ const Game = () => {
   useEffect(() => {
 
     if (isStanding && isOver) {
-      if (chipAdd.dealerCardsValue > 17) { return setIsOver(state => false) }
+      if (chipAdd.dealerCardsValue >= 17) { return setIsOver(state => false) }
       intervalId.current = setInterval(() => {
         dispatch(getOneDealerCard(cardDeck));
       }, 1000);
@@ -150,6 +150,7 @@ const Game = () => {
                   DEAL
                 </button>
             }
+
             {
               whilePlaying //if playing the game
                 ?
@@ -158,7 +159,7 @@ const Game = () => {
                   <>
                     <p className='win-mes'>BlackJasck! </p> {/*the player wins*/}
                     <p className='win-mes'>You win {chipAdd.total + chipAdd.total / 2}$ !</p>
-                    <button className='.btn-pa' onClick={() =>
+                    <button className='btn-pa' onClick={() =>
                       [playAgain(), setToggleValue(state => true)]}>PLAY AGAIN!</button>
 
                   </>
@@ -176,16 +177,16 @@ const Game = () => {
                     chipAdd.dealerCardsValue > 21
                       ?
 
-                      <p className='win-mes' >You win {chipAdd.total}$ !</p>
+                      <p className='win-mes' >BUSTED! You win {chipAdd.total}$ !</p>
 
                       :
                       chipAdd.playerCardsValue > 21//if the player has more than 21 points
                         ?
                         <div>
-                          <p className='win-mes' >Dealer Wins!</p>
+                          <p className='win-mes' >BUSTED! Dealer Wins!</p>
                         </div>
                         :
-                        chipAdd.dealerCardsValue === chipAdd.playerCardsValue
+                        (chipAdd.dealerCardsValue === chipAdd.playerCardsValue && isStanding && chipAdd.dealerCardsValue>=17 )
                           ?
                           <>
                             <p className='win-mes' >STAY!</p>
@@ -222,7 +223,7 @@ const Game = () => {
                                   <BetChipView />
                                 </div>
                                 {/* TO DO BUTTON STAND LOGIC */}
-                                <button onClick={() => [chipAdd.dealerCardsValue < 17 ? [setIsStanding(state => true), setIsOver(state => true)] : null]}>
+                                <button onClick={() => [true ? [setIsStanding(state => true), setIsOver(state => true)] : null]}>
                                   Stand
                                 </button>
                               </div>

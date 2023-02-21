@@ -32,12 +32,10 @@ export const playerChipsSliceAdd = createSlice({
         },
         chipTwentyAdd: (state) => {
             state.initialCash = 2000
-
             state.hasChips = true;
         },
         chipFiftyAdd: (state) => {
             state.initialCash = 5000
-
             state.hasChips = true;
         },
 
@@ -72,8 +70,6 @@ export const playerChipsSliceAdd = createSlice({
         },
         playAudio: (state)=>{
                 new Audio(audioChipAtStart).play();
-                
-             
         },
 
         LastOneRemove: (state) => {

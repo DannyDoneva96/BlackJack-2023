@@ -19,3 +19,12 @@
 strong{
     font-size: 42px;
 }
+
+@media screen and (max-width: 912px) {
+    .block {
+        margin: unset; 
+       width: unset; 
+        height: unset; 
+    }
+    
+}
