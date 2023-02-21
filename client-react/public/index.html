@@ -39,5 +39,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAGWbIKhhZGTfXS6-RPJKdfLbKZGgjHg2g",
+        authDomain: "blackjack2023.firebaseapp.com",
+        projectId: "blackjack2023",
+        storageBucket: "blackjack2023.appspot.com",
+        messagingSenderId: "345223541456",
+        appId: "1:345223541456:web:be1e3e4a714a23a40d64d5"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>
