@@ -53,3 +53,76 @@ transition: all 0.7s ease-in-out;
 .link-home:hover{
     color: black;
 }
+
+@media screen and (max-width: 360px) {
+    .menu{top:46%}
+    .container-to-fl{
+        gap:1rem
+    }
+    .options{
+        width:6rem;
+        font-size: 0.8rem;
+
+    }
+}
+@media screen and (min-width:361px) and (max-width:490px){
+
+     .menu{top:46%}
+    .container-to-fl{
+        gap:1rem
+    }
+    .options{
+        width:7rem;
+        font-size: 1rem;
+
+    }
+}
+
+@media screen and (min-width:490px) and (max-width:560px) {
+
+    .menu{top:46%}
+   .container-to-fl{
+       gap:1rem
+   }
+   .options{
+       width:9rem;
+       font-size: 1.3rem;
+
+   }
+}
+@media screen and (min-width:560px) and (max-width:650px)  {
+
+    .menu{top:43%}
+   .container-to-fl{
+       gap:1.8rem
+   }
+   .options{
+       width:10rem;
+       font-size: 1.5rem;
+
+   }
+}
+// @media screen and (max-height:360px) {
+
+//     .menu{top:43%}
+//    .container-to-fl{
+//        gap:1rem
+//    }
+//    .options{
+//        width:5rem;
+//        font-size: 0.5rem;
+
+//    }
+// }
+// @media screen and (max-height:480px) {
+
+//     .menu{top:43%}
+//    .container-to-fl{
+//        gap:0.8rem
+//    }
+//    .options{
+//        width:9rem;
+//        font-size: 1.5rem;
+
+//    }
+// }
