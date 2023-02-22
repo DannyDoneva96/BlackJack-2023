@@ -1,4 +1,4 @@
-.block {
+.block-game {
   color: white;
   position: relative;
   margin: 153px auto 0;
@@ -331,4 +331,27 @@
 }
 .total{
   font-size: 1.5rem
+}
+
+@media screen and (max-width: 600px) {
+ .block-game{
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  width: 100%;
+  height: 100vh;
+}
+.chips-container {
+  height: unset;
+}
+.card{
+  width: 90px;
+
+}
+.counter-cards {
+  font-size: 2rem;
+
+}
+.game-options {
+  gap:0
+}
+
 }

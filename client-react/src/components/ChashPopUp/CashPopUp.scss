@@ -79,3 +79,19 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .cash-pop-up {
+
+    width: 70%;
+    position: unset;
+    
+    margin: unset;
+    z-index: 100;
+}
+    
+    .cash-pop-up .container-cp {
+        background-color: black;
+        /* width: 100%; */
+    }
+}

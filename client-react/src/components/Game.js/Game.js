@@ -108,7 +108,7 @@ const Game = () => {
 
   return (
     <div>
-      <div className="block">
+      <div className="block-game">
           <p style={{color: "white"}}>{chipAdd.initialCash}</p>
 
         <Suspense fallback={<Loading />}>
