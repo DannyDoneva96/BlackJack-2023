@@ -1,5 +1,7 @@
 
 # Work in progress 23.01.23 - present
+
+<img src='https://github.com/DannyDoneva96/BlackJack-2023/blob/main/1678085097446.jpg' alt='photo01'>
 ## Built with:
 
 ### Frontend:
